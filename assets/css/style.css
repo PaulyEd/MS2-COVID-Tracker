@@ -70,9 +70,26 @@ body {
   padding-left: 10px;
 }
 
+/* /////////////////////////////////////////////////////// */
 
+.dataContainer {
+    max-width: 80%;
+    padding:3%;
+}
+.sidebar-max {
+    max-width: 20%;
+}
 
+@media(max-width:767px){
+    .dataContainer {
+    max-width: 100%;
+    width: 100%;
+    }
+}
 
+.navbar-border {
+    border-bottom: 1px solid #fff;
+}
 
 
 
@@ -90,4 +107,5 @@ body {
 /* https://rapidapi.com/api-sports/api/covid-193?endpoint=apiendpoint_2feca6f0-0f58-40b7-9196-98c45c7d5083 */
 
 /* https://getbootstrap.com/docs/4.4/content/tables/ */
+/* https://stackoverflow.com/questions/39260521/how-to-replace-all-the-zeros-in-javascript */
  
