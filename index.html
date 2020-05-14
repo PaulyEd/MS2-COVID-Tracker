@@ -82,22 +82,21 @@
 					<small>MAIN MENU</small>
 				</li>
 				<!-- /END Separator -->
-                <!-- /////////////////////////////////////////////////////// -->
-                <!-- /////////////////////////////////////////////////////// -->
-                <!-- /////////////////////////////////////////////////////// -->
+				<!-- /////////////////////////////////////////////////////// -->
+				<!-- /////////////////////////////////////////////////////// -->
+				<!-- /////////////////////////////////////////////////////// -->
 
 				<!-- Menu item -->
-				<a id="overview"
-					data-toggle="collapse" aria-expanded="false"
+				<a id="overview" data-toggle="collapse" aria-expanded="false"
 					class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
 					<div class="d-flex w-100 justify-content-start align-items-center">
 						<span class="fas fa-tachometer-alt fa-fw mr-3"></span>
 						<span class="menu-collapsed">Overview</span>
 					</div>
 				</a>
-                <!-- /////////////////////////////////////////////////////// -->
-                <!-- /////////////////////////////////////////////////////// -->
-                <!-- /////////////////////////////////////////////////////// -->
+				<!-- /////////////////////////////////////////////////////// -->
+				<!-- /////////////////////////////////////////////////////// -->
+				<!-- /////////////////////////////////////////////////////// -->
 
 				<a href="#submenu2" data-toggle="collapse" aria-expanded="false"
 					class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
@@ -137,8 +136,23 @@
 		<!-- sidebar-container END -->
 
 		<!-- MAIN -->
-		<div id="dashboardData">
-			
+        <div class="dataConatiner">
+        </div>
+		<div class="">
+			<table class="table" id="table">
+				<thead>
+					<tr>
+						<th scope="col">Country</th>
+						<th scope="col">Total Cases</th>
+						<th scope="col">New Cases</th>
+						<th scope="col">Total Deaths</th>
+                        <th scope="col">New Deaths</th>
+					</tr>
+				</thead>
+				<tbody id="dashboardData">
+					
+				</tbody>
+			</table>
 		</div>
 
 		<!-- Jquery Slim -->
