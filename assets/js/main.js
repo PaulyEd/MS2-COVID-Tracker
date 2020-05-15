@@ -33,40 +33,51 @@ $(document).ready(function () {
 });
 ///////////////////////////////////////////////////////////////////////////////
 
-
 ///////////////////////////////////////////////////////////////////////////////
 
-var statsConatiner = document.getElementById("dashboardData");
+var statsConatiner = document.getElementById("table");
 var data = null;
+var tableBtn = document.getElementById("table-btn");
 
-var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
+tableBtn.addEventListener("click", function () {
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === this.DONE) {
+      var ourData = JSON.parse(this.responseText);
+      console.log(ourData.response);
+      getHTML(ourData.response);
+    }
+  });
 
-xhr.addEventListener("readystatechange", function () {
-  if (this.readyState === this.DONE) {
-    var ourData = JSON.parse(this.responseText);
-    console.log(ourData.response);
-    getHTML(ourData.response);
-  }
+  xhr.open("GET", "https://covid-193.p.rapidapi.com/statistics");
+  xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
+  xhr.setRequestHeader(
+    "x-rapidapi-key",
+    "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
+  );
+
+  xhr.send(data);
 });
-
-xhr.open("GET", "https://covid-193.p.rapidapi.com/statistics");
-xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
-xhr.setRequestHeader(
-  "x-rapidapi-key",
-  "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
-);
-
-xhr.send(data);
-
 function getHTML(data) {
-  var htmlString = "";
+  $("#table").removeClass("d-none");
+  $("#table").empty();
+  var htmlString = `<thead>
+					<tr>
+						<th scope="col">Country</th>
+						<th scope="col">Total Cases</th>
+						<th scope="col">New Cases</th>
+						<th scope="col">Total Deaths</th>
+						<th scope="col">New Deaths</th>
+					</tr>
+				</thead>
+				<tbody>`;
   var replacedString = "";
 
+  //   dataConatiner.insertAdjacentHTML("beforeend", htmlString);
   for (i = 0; i < data.length; i++) {
-    
     htmlString +=
-      `<tbody><tr>
+      `<tr>
       <th scope="row">` +
       data[i].country +
       `</th>` +
@@ -85,6 +96,5 @@ function getHTML(data) {
     replacedString = htmlString.replace(/null/g, 0);
   }
 
-  statsConatiner.insertAdjacentHTML("beforeend", replacedString);
+  statsConatiner.insertAdjacentHTML("beforeend", replacedString + `</tbody>`);
 }
-
