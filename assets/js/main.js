@@ -30,7 +30,7 @@ $(document).ready(function () {
       "fa-angle-double-left fa-angle-double-right"
     );
   }
-});
+
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -40,6 +40,7 @@ var data = null;
 var tableBtn = document.getElementById("table-btn");
 
 tableBtn.addEventListener("click", function () {
+    $("#table").empty();
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
   xhr.addEventListener("readystatechange", function () {
@@ -58,10 +59,12 @@ tableBtn.addEventListener("click", function () {
   );
 
   xhr.send(data);
+  setTimeout(showpanel, 500);
+  setTimeout(showtable, 500);
 });
 function getHTML(data) {
-  $("#table").removeClass("d-none");
-  $("#table").empty();
+  
+  
   var htmlString = `<thead>
 					<tr>
 						<th scope="col">Country</th>
@@ -98,3 +101,12 @@ function getHTML(data) {
 
   statsConatiner.insertAdjacentHTML("beforeend", replacedString + `</tbody>`);
 }
+  function showpanel() {     
+    $('#table').DataTable();
+ }
+
+   function showtable() {     
+    $("#table").removeClass("d-hidden");
+ }
+
+});

@@ -71,7 +71,9 @@ body {
 }
 
 /* /////////////////////////////////////////////////////// */
-
+.d-hidden{
+    visibility:hidden;
+}
 .dataContainer {
     max-width: 80%;
     padding:3%;
@@ -91,7 +93,18 @@ body {
     border-bottom: 1px solid #fff;
 }
 
+/* JS Generated table  */
+div.dataTables_wrapper div.dataTables_length select,div.dataTables_wrapper div.dataTables_filter input {
+    margin: 10px;
+}
 
+label {
+    color: #fff;
+}
+
+.dataTables_info{
+    color: #fff;
+}
 
 /* Credits: */
 /* -------Sidebar------ */
