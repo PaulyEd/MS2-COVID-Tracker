@@ -11,11 +11,11 @@ $(document).ready(function () {
   });
 
   function SidebarCollapse() {
-       // Collapse/Expand icon
+    // Collapse/Expand icon
     $("#collapse-icon").toggleClass(
       "fa-angle-double-left fa-angle-double-right"
     );
-    
+
     $(".menu-collapsed").toggleClass("d-none");
     $(".sidebar-submenu").toggleClass("d-none");
     $(".submenu-icon").toggleClass("d-none");
@@ -25,48 +25,58 @@ $(document).ready(function () {
     var SeparatorTitle = $(".sidebar-separator-title");
     if (SeparatorTitle.hasClass("d-flex")) {
       SeparatorTitle.removeClass("d-flex");
-      á;
     } else {
       SeparatorTitle.addClass("d-flex");
     }
-
-   
   }
-});
-///////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
 
-var statsConatiner = document.getElementById("table");
-var data = null;
-var tableBtn = document.getElementById("table-btn");
+  //////////////////////////////////////////////////////////////////////////////
 
-tableBtn.addEventListener("click", function () {
-  $("#table_wrapper").addClass("d-hidden");
-  $("#table").empty();
-  var xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
-  xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === this.DONE) {
-      var ourData = JSON.parse(this.responseText);
-      console.log(ourData.response);
-      getHTML(ourData.response);
-    }
-  });
+  var statsConatiner = document.getElementById("table");
+  var data = null;
+  var tableBtn = document.getElementById("table-btn");
 
-  xhr.open("GET", "https://covid-193.p.rapidapi.com/statistics");
-  xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
-  xhr.setRequestHeader(
-    "x-rapidapi-key",
-    "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
-  );
+  var clickDelay = function () {
+    $("#tableBtnToggled").click(function () {
+      $("#table_wrapper").addClass("d-hidden");
+      $("#table").empty();
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+      xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+          var ourData = JSON.parse(this.responseText);
+          console.log(ourData.response);
+          $.when(getHTML(ourData.response)).then(setTimeout(showpanel, 1));
+          //   .then(setTimeout(showtable, 1));
+          // ($).then(setTimeout(showpanel, 1)).then(setTimeout(showtable, 1));
+        }
+      });
 
-  xhr.send(data);
-  setTimeout(showpanel, 1000);
-  setTimeout(showtable, 1000);
-});
-function getHTML(data) {
-  var htmlString = `<thead>
+      xhr.open("GET", "https://covid-193.p.rapidapi.com/statistics");
+      xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
+      xhr.setRequestHeader(
+        "x-rapidapi-key",
+        "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
+      );
+      xhr.send(data);
+      $("#table-btn").unbind();
+
+      // Call the function after 2 second delay
+      setTimeout(function () {
+        clickDelay();
+        // adds classes for table fomatting mainly related to overflow
+        $("#table").parent("div").addClass("table_scroll");
+        $("#table_wrapper").addClass("table_wrapper");
+        setTimeout(showtable, 1);
+      }, 2000);
+    });
+  };
+  clickDelay();
+  
+  function getHTML(data) {
+    var htmlString = `<thead>
 					<tr>
 						<th scope="col">Country</th>
 						<th scope="col">Total Cases</th>
@@ -76,43 +86,44 @@ function getHTML(data) {
 					</tr>
 				</thead>
 				<tbody>`;
-  var replacedString = "";
+    var replacedString = "";
 
-  //   dataConatiner.insertAdjacentHTML("beforeend", htmlString);
-  for (i = 0; i < data.length; i++) {
-    htmlString +=
-      `<tr>
+    //   dataConatiner.insertAdjacentHTML("beforeend", htmlString);
+    for (i = 0; i < data.length; i++) {
+      htmlString +=
+        `<tr>
       <th scope="row">` +
-      data[i].country +
-      `</th>` +
-      `<td>` +
-      data[i].cases.total +
-      `</td>` +
-      `<td>` +
-      data[i].cases.new +
-      `</td>` +
-      `<td>` +
-      data[i].deaths.total +
-      `</td>` +
-      `<td>` +
-      data[i].deaths.new +
-      `</td>`;
-    replacedString = htmlString.replace(/null/g, 0);
+        data[i].country +
+        `</th>` +
+        `<td>` +
+        data[i].cases.total +
+        `</td>` +
+        `<td>` +
+        data[i].cases.new +
+        `</td>` +
+        `<td>` +
+        data[i].deaths.total +
+        `</td>` +
+        `<td>` +
+        data[i].deaths.new +
+        `</td>`;
+      replacedString = htmlString.replace(/null/g, 0);
+    }
+
+    statsConatiner.insertAdjacentHTML("beforeend", replacedString + `</tbody>`);
+  }
+  function showpanel() {
+    $("#table").DataTable().destroy();
+    $("#table").DataTable();
+    $("#table_wrapper").removeClass("form-inline");
   }
 
-  statsConatiner.insertAdjacentHTML("beforeend", replacedString + `</tbody>`);
-}
-function showpanel() {
-  $("#table").DataTable().destroy();
-  $("#table").DataTable();
-  $("#table_wrapper").removeClass("form-inline");
-}
+  function showtable() {
+    $("#table").removeClass("d-hidden");
+    $("#table_wrapper").removeClass("d-hidden");
+  }
 
-function showtable() {
-  $("#table").removeClass("d-hidden");
-  $("#table_wrapper").removeClass("d-hidden");
-}
+  var refreshBtn = document.getElementById("refresh");
 
-var refreshBtn = document.getElementById("refresh");
-
-refreshBtn.addEventListener("click", function () {});
+  refreshBtn.addEventListener("click", function () {});
+});

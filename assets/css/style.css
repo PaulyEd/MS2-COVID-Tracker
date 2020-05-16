@@ -83,6 +83,7 @@ body {
 .dataContainer {
   max-width: 80%;
   padding: 3%;
+  overflow: auto;
 }
 .sidebar-max {
   max-width: 20%;
@@ -122,31 +123,30 @@ label {
 .pagination {
   display: inline-flex;
 }
-/* .row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-    display: inline-flex;
-    flex-direction: row;
-    background-color: red;
-    min-width: 100%;
+
+.table_wrapper {
+  position:relative;
+  overflow:auto;  
+}
+.table_scroll {
+  height:100%;
+  overflow:auto;  
+  margin-top:20px;
+}
+.table_wrapper table {
+  width:100%;
+
 }
 
-#table_wrapper {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-    display: inline-flex;
-    flex-direction: row;
-    background-color: red;
-    min-width: 100%;
-} */
+.table_wrapper table thead th .text {
+  position:absolute;   
+  top:-20px;
+  z-index:2;
+  height:20px;
+  width:35%;
+  border:1px solid red;
+}
+
 
 
 /* Credits: */
@@ -169,3 +169,8 @@ label {
 /* https://www.w3schools.com/jquery/html_toggleclass.asp */
 
 /* https://stackoverflow.com/questions/12934144/how-to-reload-refresh-jquery-datatable */
+
+/* https://stackoverflow.com/questions/5000415/call-a-function-after-previous-function-is-complete */
+
+/* https://stackoverflow.com/questions/10932766/disable-the-submit-button-after-clicking-and-enable-it-back-again-after-a-few-se/10932857 */
+/* https://stackoverflow.com/questions/12374356/disable-jquery-function-for-x-seconds */
