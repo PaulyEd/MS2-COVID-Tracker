@@ -1,60 +1,63 @@
 body {
-    padding-top: 56px;
+  padding-top: 56px;
 }
 
 .sticky-offset {
-    top: 56px;
+  top: 56px;
 }
 
 #body-row {
-    margin-left:0;
-    margin-right:0;
+  margin-left: 0;
+  margin-right: 0;
 }
 #sidebar-container {
-    min-height: 100vh;   
-    background-color: #333;
-    padding: 0;
+  min-height: 100vh;
+  background-color: #333;
+  padding: 0;
 }
 
 /* Sidebar sizes when expanded and expanded */
 .sidebar-expanded {
-    width: 230px;
+  width: 230px;
 }
 .sidebar-collapsed {
-    width: 60px;
+  width: 60px;
 }
 
 /* Menu item*/
 #sidebar-container .list-group a {
-    height: 50px;
-    color: white;
+  height: 50px;
+  color: white;
 }
 
 /* Submenu item*/
 #sidebar-container .list-group .sidebar-submenu a {
-    height: 45px;
-    padding-left: 30px;
+  height: 45px;
+  padding-left: 30px;
 }
 .sidebar-submenu {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 /* Separators */
 .sidebar-separator-title {
-    background-color: #333;
-    height: 35px;
+  background-color: #333;
+  height: 35px;
 }
 .sidebar-separator {
-    background-color: #333;
-    height: 25px;
+  background-color: #333;
+  height: 25px;
 }
 .logo-separator {
-    background-color: #333;    
-    height: 60px;
+  background-color: #333;
+  height: 60px;
 }
 
 /* Closed submenu icon */
-#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
+#sidebar-container
+  .list-group
+  .list-group-item[aria-expanded="false"]
+  .submenu-icon::after {
   content: " \f0d7";
   font-family: FontAwesome;
   display: inline;
@@ -62,7 +65,10 @@ body {
   padding-left: 10px;
 }
 /* Opened submenu icon */
-#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
+#sidebar-container
+  .list-group
+  .list-group-item[aria-expanded="true"]
+  .submenu-icon::after {
   content: " \f0da";
   font-family: FontAwesome;
   display: inline;
@@ -71,44 +77,77 @@ body {
 }
 
 /* /////////////////////////////////////////////////////// */
-.d-hidden{
-    visibility:hidden;
+.d-hidden {
+  visibility: hidden;
 }
 .dataContainer {
-    max-width: 80%;
-    padding:3%;
+  max-width: 80%;
+  padding: 3%;
 }
 .sidebar-max {
-    max-width: 20%;
+  max-width: 20%;
 }
 
-@media(max-width:767px){
-    .dataContainer {
+@media (max-width: 767px) {
+  .dataContainer {
     max-width: 100%;
     width: 100%;
-    }
+  }
 }
 
+/* @media (max-width: 540px) {
+  html {
+    width: 140%;
+  }
+} */
+
 .navbar-border {
-    border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #fff;
 }
 
 /* JS Generated table  */
-div.dataTables_wrapper div.dataTables_length select,div.dataTables_wrapper div.dataTables_filter input {
-    margin: 10px;
+div.dataTables_wrapper div.dataTables_length select,
+div.dataTables_wrapper div.dataTables_filter input {
+  margin: 10px;
 }
 
 label {
-    color: #fff;
+  color: #fff;
 }
 
-.dataTables_info{
-    color: #fff;
+.dataTables_info {
+  color: #fff;
 }
 
 .pagination {
-    display: inline-flex;
+  display: inline-flex;
 }
+/* .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    display: inline-flex;
+    flex-direction: row;
+    background-color: red;
+    min-width: 100%;
+}
+
+#table_wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    display: inline-flex;
+    flex-direction: row;
+    background-color: red;
+    min-width: 100%;
+} */
+
 
 /* Credits: */
 /* -------Sidebar------ */
@@ -125,8 +164,8 @@ label {
 
 /* https://getbootstrap.com/docs/4.4/content/tables/ */
 /* https://stackoverflow.com/questions/39260521/how-to-replace-all-the-zeros-in-javascript */
- 
-/* -------JQuery------ */
- /* https://www.w3schools.com/jquery/html_toggleclass.asp */
 
- /* https://stackoverflow.com/questions/12934144/how-to-reload-refresh-jquery-datatable */
+/* -------JQuery------ */
+/* https://www.w3schools.com/jquery/html_toggleclass.asp */
+
+/* https://stackoverflow.com/questions/12934144/how-to-reload-refresh-jquery-datatable */
