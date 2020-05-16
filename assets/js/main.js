@@ -11,6 +11,11 @@ $(document).ready(function () {
   });
 
   function SidebarCollapse() {
+       // Collapse/Expand icon
+    $("#collapse-icon").toggleClass(
+      "fa-angle-double-left fa-angle-double-right"
+    );
+    
     $(".menu-collapsed").toggleClass("d-none");
     $(".sidebar-submenu").toggleClass("d-none");
     $(".submenu-icon").toggleClass("d-none");
@@ -25,12 +30,9 @@ $(document).ready(function () {
       SeparatorTitle.addClass("d-flex");
     }
 
-    // Collapse/Expand icon
-    $("#collapse-icon").toggleClass(
-      "fa-angle-double-left fa-angle-double-right"
-    );
+   
   }
-
+});
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -40,7 +42,8 @@ var data = null;
 var tableBtn = document.getElementById("table-btn");
 
 tableBtn.addEventListener("click", function () {
-    $("#table").empty();
+  $("#table_wrapper").addClass("d-hidden");
+  $("#table").empty();
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
   xhr.addEventListener("readystatechange", function () {
@@ -59,12 +62,10 @@ tableBtn.addEventListener("click", function () {
   );
 
   xhr.send(data);
-  setTimeout(showpanel, 500);
-  setTimeout(showtable, 500);
+  setTimeout(showpanel, 1000);
+  setTimeout(showtable, 1000);
 });
 function getHTML(data) {
-  
-  
   var htmlString = `<thead>
 					<tr>
 						<th scope="col">Country</th>
@@ -101,12 +102,17 @@ function getHTML(data) {
 
   statsConatiner.insertAdjacentHTML("beforeend", replacedString + `</tbody>`);
 }
-  function showpanel() {     
-    $('#table').DataTable();
- }
+function showpanel() {
+  $("#table").DataTable().destroy();
+  $("#table").DataTable();
+  $("#table_wrapper").removeClass("form-inline");
+}
 
-   function showtable() {     
-    $("#table").removeClass("d-hidden");
- }
+function showtable() {
+  $("#table").removeClass("d-hidden");
+  $("#table_wrapper").removeClass("d-hidden");
+}
 
-});
+var refreshBtn = document.getElementById("refresh");
+
+refreshBtn.addEventListener("click", function () {});

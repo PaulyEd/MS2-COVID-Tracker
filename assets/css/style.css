@@ -106,6 +106,10 @@ label {
     color: #fff;
 }
 
+.pagination {
+    display: inline-flex;
+}
+
 /* Credits: */
 /* -------Sidebar------ */
 /* https://stackoverflow.com/questions/49641293/bootstrap-4-fixed-top-nav-and-fixed-sidebar */
@@ -124,3 +128,5 @@ label {
  
 /* -------JQuery------ */
  /* https://www.w3schools.com/jquery/html_toggleclass.asp */
+
+ /* https://stackoverflow.com/questions/12934144/how-to-reload-refresh-jquery-datatable */
