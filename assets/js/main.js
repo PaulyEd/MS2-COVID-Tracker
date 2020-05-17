@@ -30,6 +30,11 @@ $(document).ready(function () {
     }
   }
 
+  //   $("#dashboardStats").html(
+  //         `<div id="spinner">
+  //             <img src="assets/images/spinner.gif" alt="loading..." />
+  //         </div>`);
+
   //////////////////////////////////////////////////////////////////////////////
 
   //////////////////////////////////////////////////////////////////////////////
@@ -39,18 +44,28 @@ $(document).ready(function () {
   var tableBtn = document.getElementById("table-btn");
 
   var clickDelay = function () {
-    $("#tableBtnToggled").click(function () {
-      $("#table_wrapper").addClass("d-hidden");
+    $("#table-btn").click(function () {
+        // add loader gif
+        document.getElementById("dashboardStats").insertAdjacentHTML(
+        "beforeend",
+        `<div id="spinner">
+            <img src="assets/images/spinner.gif" alt="loading..." />
+        </div>`
+      );
+
+      $("#table_wrapper").addClass("d-hidden").addClass("d-none");
       $("#table").empty();
+      
+      
       var xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
           var ourData = JSON.parse(this.responseText);
           console.log(ourData.response);
+          //   remove loader gif
+          //   $("#spinner").remove();
           $.when(getHTML(ourData.response)).then(setTimeout(showpanel, 1));
-          //   .then(setTimeout(showtable, 1));
-          // ($).then(setTimeout(showpanel, 1)).then(setTimeout(showtable, 1));
         }
       });
 
@@ -66,15 +81,18 @@ $(document).ready(function () {
       // Call the function after 2 second delay
       setTimeout(function () {
         clickDelay();
+
         // adds classes for table fomatting mainly related to overflow
+
         $("#table").parent("div").addClass("table_scroll");
         $("#table_wrapper").addClass("table_wrapper");
+
         setTimeout(showtable, 1);
       }, 2000);
     });
   };
   clickDelay();
-  
+
   function getHTML(data) {
     var htmlString = `<thead>
 					<tr>
@@ -110,17 +128,18 @@ $(document).ready(function () {
       replacedString = htmlString.replace(/null/g, 0);
     }
 
-    statsConatiner.insertAdjacentHTML("beforeend", replacedString + `</tbody>`);
+    statsConatiner.insertAdjacentHTML("afterbegin", replacedString + `</tbody>`);
   }
   function showpanel() {
     $("#table").DataTable().destroy();
     $("#table").DataTable();
-    $("#table_wrapper").removeClass("form-inline");
+    $("#table_wrapper").removeClass("form-inline").addClass("d-hidden").addClass("d-none");
   }
 
   function showtable() {
-    $("#table").removeClass("d-hidden");
-    $("#table_wrapper").removeClass("d-hidden");
+    $("#spinner").remove();
+    $("#table").removeClass("d-hidden").removeClass("d-none");
+    $("#table_wrapper").removeClass("d-hidden").removeClass("d-none");
   }
 
   var refreshBtn = document.getElementById("refresh");
