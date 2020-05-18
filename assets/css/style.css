@@ -94,6 +94,9 @@ body {
     max-width: 100%;
     width: 100%;
   }
+  /* .col-md-7 {
+    max-width: 30%;
+  } */
 }
 
 /* @media (max-width: 540px) {
@@ -125,28 +128,38 @@ label {
 }
 
 .table_wrapper {
-  position:relative;
-  overflow:auto;  
+  position: relative;
+  overflow: auto;
 }
 .table_scroll {
-  height:100%;
-  overflow:auto;  
-  margin-top:20px;
+  height: 100%;
+  overflow: auto;
+  margin-top: 20px;
 }
 .table_wrapper table {
-  width:100%;
-
+  width: 99%;
 }
 
 .table_wrapper table thead th .text {
-  position:absolute;   
-  top:-20px;
-  z-index:2;
-  height:20px;
-  width:35%;
-  border:1px solid red;
+  position: absolute;
+  top: -20px;
+  z-index: 2;
+  height: 20px;
+  width: 35%;
+  border: 1px solid red;
 }
 
+.table td,
+.table th {
+  padding: 0.75rem 1rem 0.75rem 1rem;
+}
+
+tr {
+  width: 95%;
+}
+th[scope=row] {
+    width: 170px;
+}
 
 
 /* Credits: */
@@ -175,10 +188,10 @@ label {
 /* https://stackoverflow.com/questions/10932766/disable-the-submit-button-after-clicking-and-enable-it-back-again-after-a-few-se/10932857 */
 /* https://stackoverflow.com/questions/12374356/disable-jquery-function-for-x-seconds */
 
-
 /* ---------Tools-------- */
 /* https://loading.io/ */
 
 /* ---------Misc-------- */
 /* https://stackoverflow.com/questions/9372624/formatting-a-number-as-currency-using-css */
 /* https://stackoverflow.com/questions/4537227/javascript-replace-special-chars-with-empty-strings/4537264 */
+/* https://getbootstrap.com/docs/4.0/components/pagination/ */

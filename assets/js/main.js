@@ -45,8 +45,8 @@ $(document).ready(function () {
 
   var clickDelay = function () {
     $("#table-btn").click(function () {
-        // add loader gif
-        document.getElementById("dashboardStats").insertAdjacentHTML(
+      // add loader gif
+      document.getElementById("dashboardStats").insertAdjacentHTML(
         "beforeend",
         `<div id="spinner">
             <img src="assets/images/spinner.gif" alt="loading..." />
@@ -55,14 +55,13 @@ $(document).ready(function () {
 
       $("#table_wrapper").addClass("d-hidden").addClass("d-none");
       $("#table").empty();
-      
-      
+
       var xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
           var ourData = JSON.parse(this.responseText);
-          console.log(ourData.response);
+        //   console.log(ourData.response);
           //   remove loader gif
           //   $("#spinner").remove();
           $.when(getHTML(ourData.response)).then(setTimeout(showpanel, 1));
@@ -86,7 +85,7 @@ $(document).ready(function () {
 
         $("#table").parent("div").addClass("table_scroll");
         $("#table_wrapper").addClass("table_wrapper");
-
+        $("#table_paginate").children("ul").addClass("pagination-sm");
         setTimeout(showtable, 1);
       }, 2000);
     });
@@ -104,9 +103,7 @@ $(document).ready(function () {
 					</tr>
 				</thead>
 				<tbody>`;
-    var replacedString = "";
 
-    //   dataConatiner.insertAdjacentHTML("beforeend", htmlString);
     for (i = 0; i < data.length; i++) {
       htmlString +=
         `<tr>
@@ -114,26 +111,37 @@ $(document).ready(function () {
         data[i].country +
         `</th>` +
         `<td>` +
-        data[i].cases.total.toLocaleString('en') +
+        data[i].cases.total.toLocaleString("en") +
         `</td>` +
         `<td>` +
-        data[i].cases.new +
+        convertToInt(data[i].cases.new) +
         `</td>` +
         `<td>` +
-        data[i].deaths.total.toLocaleString('en') +
+        data[i].deaths.total.toLocaleString("en") +
         `</td>` +
         `<td>` +
-        data[i].deaths.new +
+        convertToInt(data[i].deaths.new) +
         `</td>`;
-      replacedString = htmlString.replace(/null/g, 0).replace(/[^a-zA-Z 0-9. < / > , -]+/g,'');
     }
 
-    statsConatiner.insertAdjacentHTML("afterbegin", replacedString + `</tbody>`);
+    statsConatiner.insertAdjacentHTML("afterbegin", htmlString + `</tbody>`);
+
+    function convertToInt(arrayPoint) {
+      if (arrayPoint == null) {
+        x = `0`;
+      } else x = arrayPoint.replace(/[^a-zA-Z 0-9. < / > , -]+/g, "");
+      y = parseInt(x).toLocaleString("en");
+    //   console.log(y);
+      return y;
+    }
   }
   function showpanel() {
     $("#table").DataTable().destroy();
     $("#table").DataTable();
-    $("#table_wrapper").removeClass("form-inline").addClass("d-hidden").addClass("d-none");
+    $("#table_wrapper")
+      .removeClass("form-inline")
+      .addClass("d-hidden")
+      .addClass("d-none");
   }
 
   function showtable() {
