@@ -30,10 +30,7 @@ $(document).ready(function () {
     }
   }
 
-  //   $("#dashboardStats").html(
-  //         `<div id="spinner">
-  //             <img src="assets/images/spinner.gif" alt="loading..." />
-  //         </div>`);
+
 
   //////////////////////////////////////////////////////////////////////////////
 
@@ -44,11 +41,11 @@ $(document).ready(function () {
   var tableBtn = document.getElementById("table-btn");
 
   var clickDelay = function () {
-    $("#table-btn").click(function () {
+    $(".table-btn").click(function () {
       // add loader gif
-      document.getElementById("dashboardStats").insertAdjacentHTML(
+      document.getElementById("body-row").insertAdjacentHTML(
         "beforeend",
-        `<div id="spinner">
+        `<div class=" container spinner-container" id="spinner">
             <img src="assets/images/spinner.gif" alt="loading..." />
         </div>`
       );
@@ -61,7 +58,7 @@ $(document).ready(function () {
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
           var ourData = JSON.parse(this.responseText);
-        //   console.log(ourData.response);
+          //   console.log(ourData.response);
           //   remove loader gif
           //   $("#spinner").remove();
           $.when(getHTML(ourData.response)).then(setTimeout(showpanel, 1));
@@ -75,7 +72,7 @@ $(document).ready(function () {
         "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
       );
       xhr.send(data);
-      $("#table-btn").unbind();
+      $(".table-btn").unbind();
 
       // Call the function after 2 second delay
       setTimeout(function () {
@@ -131,7 +128,7 @@ $(document).ready(function () {
         x = `0`;
       } else x = arrayPoint.replace(/[^a-zA-Z 0-9. < / > , -]+/g, "");
       y = parseInt(x).toLocaleString("en");
-    //   console.log(y);
+      //   console.log(y);
       return y;
     }
   }
@@ -150,7 +147,7 @@ $(document).ready(function () {
     $("#table_wrapper").removeClass("d-hidden").removeClass("d-none");
   }
 
-  var refreshBtn = document.getElementById("refresh");
-
-  refreshBtn.addEventListener("click", function () {});
+  $(".navbar-nav>li>a").on("click", function () {
+    $(".navbar-collapse").collapse("hide");
+  });
 });

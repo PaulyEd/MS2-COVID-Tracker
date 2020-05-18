@@ -58,36 +58,17 @@
         aria-labelledby="smallerscreenmenu"
         id="navbarNavDropdown"
       >
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto d-block d-md-none">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="#">Overview</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+          <li class="nav-item table-btn">
+            <a class="nav-link" href="#">Tables</a>
           </li>
           <li class="nav-item" id="refresh">
-            <a class="nav-link" href="#">Refresh</a>
+            <a class="nav-link" href="#">Graphs</a>
           </li>
 
-          <!-- Hides Sidebar options on larger screens -->
-          <li class="nav-item dropdown d-sm-block d-md-none">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="smallerscreenmenu"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Menu
-            </a>
-            <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-              <a class="dropdown-item" href="#">Overview</a>
-              <a id="tableBtnToggled" class="dropdown-item" href="#">Tables</a>
-              <a class="dropdown-item" href="#">Graphs</a>
-            </div>
-          </li>
-          <!-- Smaller devices menu END -->
         </ul>
       </div>
     </nav>
@@ -122,11 +103,10 @@
             </div>
           </a>
           <a
-            id="table-btn"
             href="#submenu2"
             data-toggle="collapse"
             aria-expanded="false"
-            class="bg-dark list-group-item list-group-item-action flex-column align-items-start"
+            class="bg-dark list-group-item list-group-item-action flex-column align-items-start table-btn"
           >
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fas fa-table fa-fw mr-3"></span>
@@ -167,7 +147,6 @@
         <!-- List Group END-->
       </div>
       <!-- sidebar-container END -->
-
       <!-- JS Generated Content -->
       <div class="dataContainer" id="dashboardStats">
             <table

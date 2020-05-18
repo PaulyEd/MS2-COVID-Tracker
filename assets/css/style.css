@@ -161,6 +161,16 @@ th[scope=row] {
     width: 170px;
 }
 
+#spinner{
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+.spinner-container {
+    max-width: 614px;
+}
+}
+
 
 /* Credits: */
 /* -------Sidebar------ */
@@ -195,3 +205,4 @@ th[scope=row] {
 /* https://stackoverflow.com/questions/9372624/formatting-a-number-as-currency-using-css */
 /* https://stackoverflow.com/questions/4537227/javascript-replace-special-chars-with-empty-strings/4537264 */
 /* https://getbootstrap.com/docs/4.0/components/pagination/ */
+/* https://stackoverflow.com/questions/46462171/using-the-same-function-with-multiple-buttons */
