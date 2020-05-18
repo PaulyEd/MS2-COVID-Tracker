@@ -114,18 +114,18 @@ $(document).ready(function () {
         data[i].country +
         `</th>` +
         `<td>` +
-        data[i].cases.total +
+        data[i].cases.total.toLocaleString('en') +
         `</td>` +
         `<td>` +
         data[i].cases.new +
         `</td>` +
         `<td>` +
-        data[i].deaths.total +
+        data[i].deaths.total.toLocaleString('en') +
         `</td>` +
         `<td>` +
         data[i].deaths.new +
         `</td>`;
-      replacedString = htmlString.replace(/null/g, 0);
+      replacedString = htmlString.replace(/null/g, 0).replace(/[^a-zA-Z 0-9. < / > , -]+/g,'');
     }
 
     statsConatiner.insertAdjacentHTML("afterbegin", replacedString + `</tbody>`);
