@@ -184,9 +184,9 @@ $(document).ready(function () {
     var caseData = [];
     var deathData = [];
 
-    for (i = parseInt(data.length / 2); i >= 0; i--) {
+    for (i = parseInt(data.length) - 1; i >= 0; i--) {
       var dates = data[i].day;
-      var cases = data[i].cases.total;
+      var cases = data[i].cases.recovered;
       var deaths = data[i].deaths.total;
       xlabels.push(dates);
       caseData.push(cases);
@@ -199,21 +199,52 @@ $(document).ready(function () {
         labels: xlabels,
         datasets: [
           {
-            label: "# of Cases",
+            label: "# Recovered",
             data: caseData,
-            backgroundColor: ["rgba(0, 99, 132, 0.2)"],
-            borderColor: ["green"],
-            borderWidth: 1,
+            fill: false,
+            pointStyle: "line",
+            backgroundColor: "rgba(0, 99, 132, 0.2)",
+            borderColor: "green",
+            borderWidth: 2,
+            lineTension: 1,
           },
           {
-            label: "# of Deaths",
+            label: "# Deaths",
             data: deathData,
-            backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-            borderColor: ["red"],
-            borderWidth: 1,
+            fill: false,
+            pointStyle: "line",
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "red",
+            borderWidth: 2,
+            lineTension: 1,
           },
         ],
       },
+      options: {
+        legend: {
+             labels: {
+                  fontColor: 'white'
+                 }
+              },
+        title: {
+            display: true,
+            fontColor: 'white',
+            text: 'Data over time'
+        }     ,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'white'
+                },
+            }],
+          xAxes: [{
+                ticks: {
+                    fontColor: 'white'
+                },
+            }]
+        } 
+
+    }
     });
   }
   //////////////////////////////////////////////////////////////////////////////

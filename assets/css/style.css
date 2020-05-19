@@ -171,6 +171,11 @@ th[scope="row"] {
   }
 }
 
+
+.transparent{
+    background-color: transparent;
+}
+
 /* Credits: */
 /* -------Sidebar------ */
 /* https://stackoverflow.com/questions/49641293/bootstrap-4-fixed-top-nav-and-fixed-sidebar */
@@ -210,3 +215,4 @@ th[scope="row"] {
 /* https://www.chartjs.org/docs/latest/getting-started/ */
 /* https://medium.com/wdstack/bootstrap-4-chart-js-39006427f08f */
 /* https://www.youtube.com/watch?v=5-ptp9tRApM */
+/* https://stackoverflow.com/questions/39723147/change-x-and-y-axis-font-color */
