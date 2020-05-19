@@ -1,38 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
-    <!-- Bootstrap datatables CSS-->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap4.min.css"
-      rel="stylesheet"
-    />
-    <!-- Font Awesome CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-    />
-    <!-- Local CSS -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/icon.png" />
-    <title>COVID-19 Dashboard</title>
-  </head>
 
-  <body class="bg-dark">
-    <nav
-      class="navbar navbar-expand-md navbar-dark bg-dark fixed-top navbar-border"
-    >
-      <button
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+	<!-- Bootstrap datatables CSS-->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap4.min.css"
+		rel="stylesheet" />
+	<!-- Font Awesome CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+	<!-- Local CSS -->
+	<link rel="stylesheet" href="assets/css/style.css" />
+	<!-- Favicon -->
+	<link rel="icon" type="image/x-icon" href="assets/images/icon.png" />
+	<title>COVID-19 Dashboard</title>
+</head>
+
+<body class="bg-dark">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top navbar-border">
+		<button
         class="navbar-toggler navbar-toggler-right"
         type="button"
         data-toggle="collapse"
@@ -43,139 +33,126 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">
-        <img
+		<a class="navbar-brand" href="#">
+			<img
           src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg"
           width="30"
           height="30"
           class="d-inline-block align-top"
           alt=""
         />
-        <span class="menu-collapsed">COVID-19 Tracker</span>
-      </a>
-      <div
-        class="collapse navbar-collapse"
-        aria-labelledby="smallerscreenmenu"
-        id="navbarNavDropdown"
-      >
-        <ul class="navbar-nav ml-auto d-block d-md-none">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Overview</a>
-          </li>
-          <li class="nav-item table-btn">
-            <a class="nav-link" href="#">Tables</a>
-          </li>
-          <li class="nav-item" id="refresh">
-            <a class="nav-link" href="#">Graphs</a>
-          </li>
+			<span class="menu-collapsed">COVID-19 Tracker</span>
+		</a>
+		<div class="collapse navbar-collapse" aria-labelledby="smallerscreenmenu" id="navbarNavDropdown">
+			<ul class="navbar-nav ml-auto d-block d-md-none">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Overview</a>
+				</li>
+				<li class="nav-item table-btn">
+					<a class="nav-link" href="#">Tables</a>
+				</li>
+				<li class="nav-item" id="refresh">
+					<a class="nav-link" href="#">Graphs</a>
+				</li>
 
-        </ul>
-      </div>
-    </nav>
-    <!-- NavBar END -->
+			</ul>
+		</div>
+	</nav>
+	<!-- NavBar END -->
 
-    <!-- Bootstrap row -->
-    <div class="row" id="body-row">
-      <!-- Sidebar hidden on smaller screens -->
-      <div
-        id="sidebar-container"
-        class="sidebar-expanded sidebar-max d-none d-md-block"
-      >
-        <!-- Bootstrap List Group -->
-        <ul class="list-group sticky-top sticky-offset">
-          <!-- Separator with title -->
-          <li
-            class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed"
-          >
-            <small>MAIN MENU</small>
-          </li>
-          <!-- /END Separator -->
-          <!-- Menu item -->
-          <a
-            id="overview"
-            data-toggle="collapse"
-            aria-expanded="false"
-            class="bg-dark list-group-item list-group-item-action flex-column align-items-start"
-          >
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fas fa-tachometer-alt fa-fw mr-3"></span>
-              <span class="menu-collapsed">Overview</span>
-            </div>
-          </a>
-          <a
-            href="#submenu2"
-            data-toggle="collapse"
-            aria-expanded="false"
-            class="bg-dark list-group-item list-group-item-action flex-column align-items-start table-btn"
-          >
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fas fa-table fa-fw mr-3"></span>
-              <span id="tabletext" class="menu-collapsed">Tables</span>
-            </div>
-          </a>
-          <a href="#" class="bg-dark list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fas fa-chart-bar fa-fw mr-3"></span>
-              <span class="menu-collapsed">Graphs</span>
-            </div>
-          </a>
-          <!-- Separator with title -->
-          <li
-            class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed"
-          >
-            <small>OPTIONS</small>
-          </li>
-          <!-- /END Separator -->
-          <a href="#" class="bg-dark list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span class="fa fa-question fa-fw mr-3"></span>
-              <span class="menu-collapsed">Help</span>
-            </div>
-          </a>
-          <a
-            href="#"
-            data-toggle="sidebar-colapse"
-            class="bg-dark list-group-item list-group-item-action d-flex align-items-center"
-          >
-            <div class="d-flex w-100 justify-content-start align-items-center">
-              <span id="collapse-icon" class="fa fa-2x mr-3"></span>
-              <span id="collapse-text" class="menu-collapsed">Collapse</span>
-            </div>
-          </a>
-          <!-- Logo -->
-        </ul>
-        <!-- List Group END-->
-      </div>
-      <!-- sidebar-container END -->
-      <!-- JS Generated Content -->
-      <div class="dataContainer" id="dashboardStats">
-            <table
-              class="table table-striped table-dark d-hidden d-none"
-              id="table">
-              </table>
-      </div>
-      <!-- Jquery -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
-      <!-- jquery dataTables -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
-      <!-- bootstrap4 dataTables -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.13/js/dataTables.bootstrap4.min.js"></script>
-      <!-- Popper js -->
-      <script
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"
-      ></script>
-      <!-- Bootstrap JS -->
-      <script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"
-      ></script>
-      <!-- FA JS -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-      <!-- local JS -->
-      <script src="assets/js/main.js"></script>
-    </div>
-  </body>
+	<!-- Bootstrap row -->
+	<div class="row" id="body-row">
+		<!-- Sidebar hidden on smaller screens -->
+		<div id="sidebar-container" class="sidebar-expanded sidebar-max d-none d-md-block">
+			<!-- Bootstrap List Group -->
+			<ul class="list-group sticky-top sticky-offset">
+				<!-- Separator with title -->
+				<li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+					<small>MAIN MENU</small>
+				</li>
+				<!-- /END Separator -->
+				<!-- Menu item -->
+				<a id="overview" data-toggle="collapse" aria-expanded="false"
+					class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-start align-items-center">
+						<span class="fas fa-tachometer-alt fa-fw mr-3"></span>
+						<span class="menu-collapsed">Overview</span>
+					</div>
+				</a>
+				<a href="#" data-toggle="collapse" aria-expanded="false"
+					class="bg-dark list-group-item list-group-item-action flex-column align-items-start table-btn">
+					<div class="d-flex w-100 justify-content-start align-items-center">
+						<span class="fas fa-table fa-fw mr-3"></span>
+						<span id="tabletext" class="menu-collapsed">Tables</span>
+					</div>
+				</a>
+				<a href="#" class="bg-dark list-group-item list-group-item-action graph-btn">
+					<div class="d-flex w-100 justify-content-start align-items-center">
+						<span class="fas fa-chart-bar fa-fw mr-3"></span>
+						<span class="menu-collapsed">Graphs</span>
+					</div>
+				</a>
+				<!-- Separator with title -->
+				<li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+					<small>OPTIONS</small>
+				</li>
+				<!-- /END Separator -->
+				<a href="#" class="bg-dark list-group-item list-group-item-action">
+					<div class="d-flex w-100 justify-content-start align-items-center">
+						<span class="fa fa-question fa-fw mr-3"></span>
+						<span class="menu-collapsed">Help</span>
+					</div>
+				</a>
+				<a href="#" data-toggle="sidebar-colapse"
+					class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+					<div class="d-flex w-100 justify-content-start align-items-center">
+						<span id="collapse-icon" class="fa fa-2x mr-3"></span>
+						<span id="collapse-text" class="menu-collapsed">Collapse</span>
+					</div>
+				</a>
+				<!-- Logo -->
+			</ul>
+			<!-- List Group END-->
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<canvas id="myChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- sidebar-container END -->
+		<!-- JS Generated Content -->
+		<div class="dataContainer" id="dashboardStats">
+			<table class="table table-striped table-dark d-hidden d-none" id="table">
+			</table>
+		</div>
+		<!-- Jquery -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+		<!-- jquery dataTables -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+		<!-- bootstrap4 dataTables -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.13/js/dataTables.bootstrap4.min.js">
+		</script>
+		<!-- Popper js -->
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+		</script>
+		<!-- Bootstrap JS -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+			integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+		</script>
+		<!-- ChartJS -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<!-- FA JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+		<!-- local JS -->
+		<script src="assets/js/main.js"></script>
+	</div>
+</body>
+
 </html>

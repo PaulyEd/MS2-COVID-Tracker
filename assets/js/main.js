@@ -30,8 +30,6 @@ $(document).ready(function () {
     }
   }
 
-
-
   //////////////////////////////////////////////////////////////////////////////
 
   //////////////////////////////////////////////////////////////////////////////
@@ -150,4 +148,73 @@ $(document).ready(function () {
   $(".navbar-nav>li>a").on("click", function () {
     $(".navbar-collapse").collapse("hide");
   });
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  $(".graph-btn").click(function () {
+    var country = "usa";
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+        var historyData = JSON.parse(this.responseText);
+        console.log(historyData.response);
+        getData(historyData.response);
+        // var date = historyData.response[35].day;
+        // console.log(date);
+      }
+    });
+
+    xhr.open(
+      "GET",
+      `https://covid-193.p.rapidapi.com/history?country=${country}`
+    );
+    xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
+    xhr.setRequestHeader(
+      "x-rapidapi-key",
+      "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
+    );
+
+    xhr.send(data);
+  });
+
+  function getData(data) {
+    var ctx = document.getElementById("myChart");
+    var xlabels = [];
+    var caseData = [];
+    var deathData = [];
+
+    for (i = parseInt(data.length / 2); i >= 0; i--) {
+      var dates = data[i].day;
+      var cases = data[i].cases.total;
+      var deaths = data[i].deaths.total;
+      xlabels.push(dates);
+      caseData.push(cases);
+      deathData.push(deaths);
+      //   console.log(cases);
+    }
+    var myChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: xlabels,
+        datasets: [
+          {
+            label: "# of Cases",
+            data: caseData,
+            backgroundColor: ["rgba(0, 99, 132, 0.2)"],
+            borderColor: ["green"],
+            borderWidth: 1,
+          },
+          {
+            label: "# of Deaths",
+            data: deathData,
+            backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+            borderColor: ["red"],
+            borderWidth: 1,
+          },
+        ],
+      },
+    });
+  }
+  //////////////////////////////////////////////////////////////////////////////
 });

@@ -157,20 +157,19 @@ label {
 tr {
   width: 95%;
 }
-th[scope=row] {
-    width: 170px;
+th[scope="row"] {
+  width: 170px;
 }
 
-#spinner{
-    text-align: center;
+#spinner {
+  text-align: center;
 }
 
 @media (min-width: 768px) {
-.spinner-container {
+  .spinner-container {
     max-width: 614px;
+  }
 }
-}
-
 
 /* Credits: */
 /* -------Sidebar------ */
@@ -206,3 +205,8 @@ th[scope=row] {
 /* https://stackoverflow.com/questions/4537227/javascript-replace-special-chars-with-empty-strings/4537264 */
 /* https://getbootstrap.com/docs/4.0/components/pagination/ */
 /* https://stackoverflow.com/questions/46462171/using-the-same-function-with-multiple-buttons */
+
+/* ---------Chart JS-------- */
+/* https://www.chartjs.org/docs/latest/getting-started/ */
+/* https://medium.com/wdstack/bootstrap-4-chart-js-39006427f08f */
+/* https://www.youtube.com/watch?v=5-ptp9tRApM */
