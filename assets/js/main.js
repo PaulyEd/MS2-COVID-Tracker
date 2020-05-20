@@ -12,7 +12,6 @@ $(document).ready(function () {
   $(".navbar-nav>li>a").on("click", function () {
     $(".navbar-collapse").collapse("hide");
   });
-  $(".js-example-basic-single").select2();
   function SidebarCollapse() {
     // Collapse/Expand icon
     $("#collapse-icon").toggleClass(
@@ -148,17 +147,52 @@ $(document).ready(function () {
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  //   $(".graph-btn").click(function () {
-  //     $("#dashboard-graphs").insertAdjacentHTML(
-  //       "beforeend",
-  //       `<div class=" container spinner-container" id="spinner">
-  //             <img src="assets/images/spinner.gif" alt="loading..." />
-  //         </div>`
-  //     );
-  //   });
 
-  // GRAPH POPULATE FUNCTION
+  
+  //////////////////////////////////////////////////////////////////////////////
+  // TABLE COUNTRIES FUNCTION
   $(".graph-btn").click(function () {
+    var dashboard = document.getElementById("dashboardCountry");
+    var data = null;
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+        var ourData = JSON.parse(this.responseText);
+        getCountries(ourData.response);
+      }
+    });
+
+    xhr.open("GET", "https://covid-193.p.rapidapi.com/countries");
+    xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
+    xhr.setRequestHeader(
+      "x-rapidapi-key",
+      "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
+    );
+    xhr.send(data);
+
+    function getCountries(data) {
+      var htmlString = `
+				<select class="js-example-basic-single" name="state">`;
+
+      for (i = 0; i < data.length; i++) {
+        htmlString +=
+          `<option value="` + data[i] + `">` + data[i] + `</option>`;
+      }
+      dashboard.insertAdjacentHTML(
+        "afterbegin",
+        htmlString + `</select>`
+      );
+
+      $(".js-example-basic-single").select2();
+      $("#dashboardCountry").toggleClass("d-none");
+    }
+  });
+
+//////////////////////////////////////////////////////////////////////////////
+  // GRAPH POPULATE FUNCTION
+
+$("#get-graph").click(function () {
     var country = "usa";
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -259,4 +293,5 @@ $(document).ready(function () {
     $("#dashboard-graphs").toggleClass("d-none");
   }
   //////////////////////////////////////////////////////////////////////////////
+  // RESET dashboard-content Container to be built to run before each seperate function
 });
