@@ -9,7 +9,10 @@ $(document).ready(function () {
   $("[data-toggle=sidebar-colapse]").click(function () {
     SidebarCollapse();
   });
-
+  $(".navbar-nav>li>a").on("click", function () {
+    $(".navbar-collapse").collapse("hide");
+  });
+  $(".js-example-basic-single").select2();
   function SidebarCollapse() {
     // Collapse/Expand icon
     $("#collapse-icon").toggleClass(
@@ -29,11 +32,10 @@ $(document).ready(function () {
       SeparatorTitle.addClass("d-flex");
     }
   }
-
   //////////////////////////////////////////////////////////////////////////////
 
   //////////////////////////////////////////////////////////////////////////////
-
+  // TABLE POPULATE FUNCTION
   var statsConatiner = document.getElementById("table");
   var data = null;
   var tableBtn = document.getElementById("table-btn");
@@ -145,12 +147,17 @@ $(document).ready(function () {
     $("#table_wrapper").removeClass("d-hidden").removeClass("d-none");
   }
 
-  $(".navbar-nav>li>a").on("click", function () {
-    $(".navbar-collapse").collapse("hide");
-  });
-
   //////////////////////////////////////////////////////////////////////////////
+  //   $(".graph-btn").click(function () {
+  //     $("#dashboard-graphs").insertAdjacentHTML(
+  //       "beforeend",
+  //       `<div class=" container spinner-container" id="spinner">
+  //             <img src="assets/images/spinner.gif" alt="loading..." />
+  //         </div>`
+  //     );
+  //   });
 
+  // GRAPH POPULATE FUNCTION
   $(".graph-btn").click(function () {
     var country = "usa";
     var xhr = new XMLHttpRequest();
@@ -222,30 +229,34 @@ $(document).ready(function () {
       },
       options: {
         legend: {
-             labels: {
-                  fontColor: 'white'
-                 }
-              },
+          labels: {
+            fontColor: "white",
+          },
+        },
         title: {
-            display: true,
-            fontColor: 'white',
-            text: 'Data over time'
-        }     ,
+          display: true,
+          fontColor: "white",
+          text: "Data over time",
+        },
         scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: 'white'
-                },
-            }],
-          xAxes: [{
-                ticks: {
-                    fontColor: 'white'
-                },
-            }]
-        } 
-
-    }
+          yAxes: [
+            {
+              ticks: {
+                fontColor: "white",
+              },
+            },
+          ],
+          xAxes: [
+            {
+              ticks: {
+                fontColor: "white",
+              },
+            },
+          ],
+        },
+      },
     });
+    $("#dashboard-graphs").toggleClass("d-none");
   }
   //////////////////////////////////////////////////////////////////////////////
 });
