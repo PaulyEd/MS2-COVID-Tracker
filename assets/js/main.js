@@ -35,12 +35,12 @@ $(document).ready(function () {
 
   //////////////////////////////////////////////////////////////////////////////
   // TABLE POPULATE FUNCTION
-  var statsConatiner = document.getElementById("table");
-  var data = null;
-  var tableBtn = document.getElementById("table-btn");
 
+  var data = null;
   var clickDelay = function () {
     $(".table-btn").click(function () {
+      reset();
+
       // add loader gif
       document.getElementById("body-row").insertAdjacentHTML(
         "beforeend",
@@ -48,9 +48,6 @@ $(document).ready(function () {
             <img src="assets/images/spinner.gif" alt="loading..." />
         </div>`
       );
-
-      $("#table_wrapper").addClass("d-hidden").addClass("d-none");
-      $("#table").empty();
 
       var xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
@@ -89,6 +86,7 @@ $(document).ready(function () {
   clickDelay();
 
   function getHTML(data) {
+    var statsConatiner = document.getElementById("table");
     var htmlString = `<thead>
 					<tr>
 						<th scope="col">Country</th>
@@ -148,11 +146,12 @@ $(document).ready(function () {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  
   //////////////////////////////////////////////////////////////////////////////
   // TABLE COUNTRIES FUNCTION
   $(".graph-btn").click(function () {
-    var dashboard = document.getElementById("dashboardCountry");
+    reset();
+    // $("#dashboard-graphs").removeClass("d-none");
+    var dashboard = document.getElementById("selector-container");
     var data = null;
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -179,20 +178,20 @@ $(document).ready(function () {
         htmlString +=
           `<option value="` + data[i] + `">` + data[i] + `</option>`;
       }
-      dashboard.insertAdjacentHTML(
-        "afterbegin",
-        htmlString + `</select>`
-      );
-
+      // dashboard.insertAdjacentHTML(
+      //   "afterbegin",
+      //   htmlString + `</select>`
+      // );
+      $("#selector-container").html(`${htmlString} + </select>`);
       $(".js-example-basic-single").select2();
-      $("#dashboardCountry").toggleClass("d-none");
+      $("#dashboardCountry").removeClass("d-none");
     }
   });
 
-//////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
   // GRAPH POPULATE FUNCTION
 
-$("#get-graph").click(function () {
+  $("#get-graph").click(function () {
     var country = "usa";
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -290,8 +289,15 @@ $("#get-graph").click(function () {
         },
       },
     });
-    $("#dashboard-graphs").toggleClass("d-none");
+    $("#dashboard-graphs").removeClass("d-none");
+    $("#card-border").removeClass("border-0");
   }
   //////////////////////////////////////////////////////////////////////////////
   // RESET dashboard-content Container to be built to run before each seperate function
+  function reset() {
+    $("#dashboardCountry").addClass("d-none");
+    $("#dashboard-graphs").addClass("d-none");
+    $("#table_wrapper").addClass("d-hidden").addClass("d-none");
+    $("#table").empty();
+  }
 });

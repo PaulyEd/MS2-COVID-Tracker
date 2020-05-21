@@ -89,6 +89,7 @@ body {
   max-width: 80%;
   padding: 3%;
   overflow: auto;
+  text-align: center;
 }
 
 .sidebar-max {
@@ -199,8 +200,8 @@ th[scope="row"] {
     width: 650px;
     height: auto;
   }
-  #myChart{
-      min-width: 550px;
+  #myChart {
+    min-width: 550px;
   }
 }
 
@@ -210,8 +211,8 @@ th[scope="row"] {
     width: 600px;
     height: auto;
   }
-  .country-selector{
-      min-width: 300px;
+  .country-selector {
+    min-width: 300px;
   }
 }
 
@@ -230,13 +231,29 @@ th[scope="row"] {
     height: auto;
   }
 }
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
+  height: 100%;
+  padding: 0.375rem 0.75rem;
+}
 
-.country-selector{
-    text-align: center;
+.select2-container--default .select2-selection--single {
+  height: 100%;
+  padding: 0.375rem 0.75rem;
+}
+
+#get-graph {
+  margin-right: 1rem;
+}
+
+.country-selector {
+  text-align: center;
+  display: inline-flex;
 }
 
 .select2-container {
-    min-width: 200px;
+  min-width: 200px;
 }
 
 /* Credits: */
