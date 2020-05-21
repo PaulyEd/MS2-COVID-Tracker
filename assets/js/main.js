@@ -145,7 +145,7 @@ $(document).ready(function () {
   }
 
   //////////////////////////////////////////////////////////////////////////////
-
+  var country = "";
   //////////////////////////////////////////////////////////////////////////////
   // TABLE COUNTRIES FUNCTION
   $(".graph-btn").click(function () {
@@ -172,7 +172,7 @@ $(document).ready(function () {
 
     function getCountries(data) {
       var htmlString = `
-				<select class="js-example-basic-single" name="state">`;
+				<select id="selectCountry">`;
 
       for (i = 0; i < data.length; i++) {
         htmlString +=
@@ -183,16 +183,27 @@ $(document).ready(function () {
       //   htmlString + `</select>`
       // );
       $("#selector-container").html(`${htmlString} + </select>`);
-      $(".js-example-basic-single").select2();
+        $("#selectCountry").select2().unbind();
+        $("#selectCountry").select2();
       $("#dashboardCountry").removeClass("d-none");
+
+    //   Use Country selector as variable
+      var selectCountry = document.getElementById("selectCountry");
+      var lvl = document.getElementById("lvl");
+      selectCountry.onchange = function () {
+        country = this.options[this.selectedIndex].getAttribute("value");
+        // console.log(country);
+      };
+      selectCountry.onchange();
     }
   });
 
   //////////////////////////////////////////////////////////////////////////////
   // GRAPH POPULATE FUNCTION
-
+console.log(country);
   $("#get-graph").click(function () {
-    var country = "usa";
+      console.log(country);
+    // var country = "usa";
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
     xhr.addEventListener("readystatechange", function () {
