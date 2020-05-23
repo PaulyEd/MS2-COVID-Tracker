@@ -142,6 +142,7 @@ $(document).ready(function () {
     $("#spinner").remove();
     $("#table").removeClass("d-hidden").removeClass("d-none");
     $("#table_wrapper").removeClass("d-hidden").removeClass("d-none");
+    $("#dashboardStats").removeClass("d-none");
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -183,11 +184,11 @@ $(document).ready(function () {
       //   htmlString + `</select>`
       // );
       $("#selector-container").html(`${htmlString} + </select>`);
-        $("#selectCountry").select2().unbind();
-        $("#selectCountry").select2();
+      $("#selectCountry").select2().unbind();
+      $("#selectCountry").select2();
       $("#dashboardCountry").removeClass("d-none");
 
-    //   Use Country selector as variable
+      //   Use Country selector as variable
       var selectCountry = document.getElementById("selectCountry");
       var lvl = document.getElementById("lvl");
       selectCountry.onchange = function () {
@@ -200,10 +201,16 @@ $(document).ready(function () {
 
   //////////////////////////////////////////////////////////////////////////////
   // GRAPH POPULATE FUNCTION
-console.log(country);
+  //   console.log(country);
+
   $("#get-graph").click(function () {
-      console.log(country);
-    // var country = "usa";
+    $("#myChart").remove();
+    $(".chartjs-size-monitor").remove();
+    $("#graph-container").append(
+      '<canvas id="myChart" class="transparent"></canvas>'
+    );
+    // console.log(country);
+
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
     xhr.addEventListener("readystatechange", function () {
@@ -287,6 +294,12 @@ console.log(country);
             {
               ticks: {
                 fontColor: "white",
+                userCallback: function (value, index, values) {
+                  value = value.toString();
+                  value = value.split(/(?=(?:...)*$)/);
+                  value = value.join(",");
+                  return value;
+                },
               },
             },
           ],
@@ -306,6 +319,7 @@ console.log(country);
   //////////////////////////////////////////////////////////////////////////////
   // RESET dashboard-content Container to be built to run before each seperate function
   function reset() {
+    $("#dashboardStats").addClass("d-none");
     $("#dashboardCountry").addClass("d-none");
     $("#dashboard-graphs").addClass("d-none");
     $("#table_wrapper").addClass("d-hidden").addClass("d-none");

@@ -1,7 +1,9 @@
 body {
   padding-top: 56px;
 }
-
+h1, h2, h3 {
+  color: #fff;
+}
 .sticky-offset {
   top: 56px;
 }
@@ -80,11 +82,9 @@ body {
 .d-hidden {
   visibility: hidden;
 }
-/* .dataContainer {
-  max-width: 80%;
-  padding: 3%;
-  overflow: auto;
-} */
+.dataContainer {
+  width: 100%;
+}
 .content-container {
   max-width: 80%;
   padding: 3%;
@@ -211,9 +211,9 @@ th[scope="row"] {
     width: 600px;
     height: auto;
   }
-  .country-selector {
+  /* .country-selector {
     min-width: 300px;
-  }
+  } */
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -244,17 +244,75 @@ th[scope="row"] {
 }
 
 #get-graph {
+  /* margin-left: 1rem; */
+  max-height: 42px;
+  width: 163px;
+}
+/* #selector-container{
+    text-align: left;
+} */
+#select-label {
+  text-align: right;
+  vertical-align: middle;
+  color: #fff;
+}
+#select-label p {
+  margin-top: 0.5rem;
   margin-right: 1rem;
+  margin-bottom: auto;
 }
 
-.country-selector {
+.row-top {
+  margin-bottom: 1rem;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+/* .country-selector {
   text-align: center;
   display: inline-flex;
-}
+} */
 
 .select2-container {
-  min-width: 200px;
+  min-width: 163px;
 }
+
+
+.container-selector{
+    border: 1px solid #333;
+    margin: 1rem 0 1rem 0; 
+    padding: 1rem 4rem 1rem 4rem;
+}
+
+
+.header-container{
+    width: 100%;
+}
+
+
+.card-width{
+    width: 300px;
+}
+
+
+.chartjs-size-monitor{
+    position: relative !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Credits: */
 /* -------Sidebar------ */
@@ -299,3 +357,5 @@ th[scope="row"] {
 /* https://www.youtube.com/watch?v=5-ptp9tRApM */
 /* https://stackoverflow.com/questions/39723147/change-x-and-y-axis-font-color */
 /* https://stackoverflow.com/questions/35854244/how-can-i-create-a-horizontal-scrolling-chart-js-line-chart-with-a-locked-y-axis */
+/* https://stackoverflow.com/questions/24785713/chart-js-load-totally-new-data */
+/* https://stackoverflow.com/questions/38800226/chart-js-add-commas-to-tooltip-and-y-axis */
