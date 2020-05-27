@@ -317,6 +317,84 @@ $(document).ready(function () {
     $("#card-border").removeClass("border-0");
   }
   //////////////////////////////////////////////////////////////////////////////
+
+  $(".overview-btn").click(function () {
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+        var allData = JSON.parse(this.responseText);
+        console.log(allData.response);
+        getAll(allData.response);
+      }
+    });
+
+    xhr.open("GET", `https://covid-193.p.rapidapi.com/statistics`);
+    xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
+    xhr.setRequestHeader(
+      "x-rapidapi-key",
+      "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
+    );
+
+    xhr.send(data);
+  });
+
+  function getAll(data) {
+    var overviewContainer = document.getElementById("overview");
+    var htmlString = ``;
+
+    for (i = 0; i < data.length; i++) {
+      if (data[i].country == "All") {
+        htmlString +=
+          `<div class="row row-overview">
+					<div class="col-12 col-md-6">
+                    <h2>Total Cases</h2><h1>` +
+          data[i].cases.total.toLocaleString("en") +
+          `</h1>
+					</div>
+					<div class="col-12 col-md-6">
+                    <h2>Total Recovered</h2>
+                    <h1>` +
+          data[i].cases.recovered.toLocaleString("en") +
+          `</h1>
+					</div>
+				</div>
+                <div class="row row-overview">
+					<div class="col-12 col-md-6">
+                    <h2>Total Deaths</h2>
+                    <h1>` +
+          data[i].deaths.total.toLocaleString("en") +
+          `</h1>
+					</div>
+					<div class="col-12 col-md-6">
+                    <h2>Total Critical</h2>
+                    <h1>` +
+          data[i].cases.critical.toLocaleString("en") +
+          `</h1>
+					</div>
+				</div>
+                <div class="row row-overview">
+					<div class="col-12 col-md-6">
+                    <h2>Total Active</h2>
+                    <h1>` +
+          data[i].cases.active.toLocaleString("en") +
+          `</h1>
+					</div>
+					<div class="col-12 col-md-6">
+                    <h2>Death Rate</h2>
+                    <h1>` +
+        //   data[i].deaths.total.toLocaleString("en") +
+        (parseInt(data[i].deaths.total) / (parseInt(data[i].cases.recovered) + parseInt(data[i].deaths.total))*100).toFixed(2) +
+          `%</h1>
+					</div>
+				</div>`;
+      }
+    }
+
+    overviewContainer.insertAdjacentHTML("afterbegin", htmlString);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // RESET dashboard-content Container to be built to run before each seperate function
   function reset() {
     $("#dashboardStats").addClass("d-none");
