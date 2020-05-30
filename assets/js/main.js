@@ -1,6 +1,5 @@
 $(document).ready(function () {
-  // Hide submenus
-  //   $("#body-row .collapse").collapse("hide");
+  /////////////////SIDE BAR FUNCTIONS////////////////////////////
 
   // Collapse/Expand icon
   $("#collapse-icon").addClass("fa-angle-double-left");
@@ -31,18 +30,16 @@ $(document).ready(function () {
       SeparatorTitle.addClass("d-flex");
     }
   }
-  //////////////////////////////////////////////////////////////////////////////
+  /////////////////SIDE BAR FUNCTIONS END//////////////////////////
 
-  //////////////////////////////////////////////////////////////////////////////
-  // TABLE POPULATE FUNCTION
-
+  /////////////////TABLE POPULATE FUNCTION////////////////////////////
   var data = null;
   var clickDelay = function () {
     $(".table-btn").click(function () {
       reset();
 
       // add loader gif
-      document.getElementById("body-row").insertAdjacentHTML(
+      document.getElementById("dashboard-content").insertAdjacentHTML(
         "beforeend",
         `<div class=" container spinner-container" id="spinner">
             <img src="assets/images/spinner.gif" alt="loading..." />
@@ -84,71 +81,10 @@ $(document).ready(function () {
     });
   };
   clickDelay();
+  ///////////////TABLE POPULATE FUNCTION END/////////////////////
 
-  function getHTML(data) {
-    var statsConatiner = document.getElementById("table");
-    var htmlString = `<thead>
-					<tr>
-						<th scope="col">Country</th>
-						<th scope="col">Total Cases</th>
-						<th scope="col">New Cases</th>
-						<th scope="col">Total Deaths</th>
-						<th scope="col">New Deaths</th>
-					</tr>
-				</thead>
-				<tbody>`;
-
-    for (i = 0; i < data.length; i++) {
-      htmlString +=
-        `<tr>
-      <th scope="row">` +
-        data[i].country +
-        `</th>` +
-        `<td>` +
-        data[i].cases.total.toLocaleString("en") +
-        `</td>` +
-        `<td>` +
-        convertToInt(data[i].cases.new) +
-        `</td>` +
-        `<td>` +
-        data[i].deaths.total.toLocaleString("en") +
-        `</td>` +
-        `<td>` +
-        convertToInt(data[i].deaths.new) +
-        `</td>`;
-    }
-
-    statsConatiner.insertAdjacentHTML("afterbegin", htmlString + `</tbody>`);
-
-    function convertToInt(arrayPoint) {
-      if (arrayPoint == null) {
-        x = `0`;
-      } else x = arrayPoint.replace(/[^a-zA-Z 0-9. < / > , -]+/g, "");
-      y = parseInt(x).toLocaleString("en");
-      //   console.log(y);
-      return y;
-    }
-  }
-  function showpanel() {
-    $("#table").DataTable().destroy();
-    $("#table").DataTable();
-    $("#table_wrapper")
-      .removeClass("form-inline")
-      .addClass("d-hidden")
-      .addClass("d-none");
-  }
-
-  function showtable() {
-    $("#spinner").remove();
-    $("#table").removeClass("d-hidden").removeClass("d-none");
-    $("#table_wrapper").removeClass("d-hidden").removeClass("d-none");
-    $("#dashboardStats").removeClass("d-none");
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
+  //////////COUNTRIES FOR TABLE FUNCTION////////////////////////
   var country = "";
-  //////////////////////////////////////////////////////////////////////////////
-  // TABLE COUNTRIES FUNCTION
   $(".graph-btn").click(function () {
     reset();
     // $("#dashboard-graphs").removeClass("d-none");
@@ -170,38 +106,10 @@ $(document).ready(function () {
       "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
     );
     xhr.send(data);
-
-    function getCountries(data) {
-      var htmlString = `
-				<select id="selectCountry">`;
-
-      for (i = 0; i < data.length; i++) {
-        htmlString +=
-          `<option value="` + data[i] + `">` + data[i] + `</option>`;
-      }
-      // dashboard.insertAdjacentHTML(
-      //   "afterbegin",
-      //   htmlString + `</select>`
-      // );
-      $("#selector-container").html(`${htmlString} + </select>`);
-      $("#selectCountry").select2().unbind();
-      $("#selectCountry").select2();
-      $("#dashboardCountry").removeClass("d-none");
-
-      //   Use Country selector as variable
-      var selectCountry = document.getElementById("selectCountry");
-      var lvl = document.getElementById("lvl");
-      selectCountry.onchange = function () {
-        country = this.options[this.selectedIndex].getAttribute("value");
-        // console.log(country);
-      };
-      selectCountry.onchange();
-    }
   });
+  //////////COUNTRIES FOR TABLE FUNCTION END/////////////////////
 
-  //////////////////////////////////////////////////////////////////////////////
-  // GRAPH POPULATE FUNCTION
-  //   console.log(country);
+  ///////////////GRAPH DATA FUNCTION/////////////////////
 
   $("#get-graph").click(function () {
     $("#myChart").remove();
@@ -235,6 +143,120 @@ $(document).ready(function () {
 
     xhr.send(data);
   });
+  ///////////////GRAPH DATA FUNCTION END//////////////////
+
+  ///////////////OVERVIEW STATS FUNCTION/////////////////////
+  var Delay = function () {
+    $(".overview-btn").click(function () {
+      $(this).attr("disabled", "disabled");
+      reset();
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+      xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+          var allData = JSON.parse(this.responseText);
+          console.log(allData.response);
+          getAll(allData.response);
+        }
+      });
+
+      xhr.open("GET", `https://covid-193.p.rapidapi.com/statistics`);
+      xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
+      xhr.setRequestHeader(
+        "x-rapidapi-key",
+        "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
+      );
+      xhr.send(data);
+
+      $(".overview-btn").unbind();
+      setTimeout(function () {
+        Delay();
+      }, 2000);
+    });
+  };
+  Delay();
+  ///////////////OVERVIEW STATS FUNCTION END//////////////////
+
+  //////////////////////////Get Functions/////////////////////////
+  function getCountries(data) {
+    var htmlString = `
+				<select id="selectCountry">`;
+
+    for (i = 0; i < data.length; i++) {
+      htmlString += `<option value="` + data[i] + `">` + data[i] + `</option>`;
+    }
+
+    $("#selector-container").html(`${htmlString} + </select>`);
+    $("#selectCountry").select2().unbind();
+    $("#selectCountry").select2();
+    $("#dashboardCountry").removeClass("d-none");
+
+    //   Use Country selector as variable
+    var selectCountry = document.getElementById("selectCountry");
+    var lvl = document.getElementById("lvl");
+    selectCountry.onchange = function () {
+      country = this.options[this.selectedIndex].getAttribute("value");
+    };
+    selectCountry.onchange();
+  }
+
+  function getAll(data) {
+    var overviewContainer = document.getElementById("overview");
+    var htmlString = ``;
+
+    for (i = 0; i < data.length; i++) {
+      if (data[i].country == "All") {
+        htmlString +=
+          `<div class="row row-overview">
+					<div class="col-12 col-md-6">
+                    <h2>Total Cases</h2><h1>` +
+          data[i].cases.total.toLocaleString("en") +
+          `</h1>
+					</div>
+					<div class="col-12 col-md-6">
+                    <h2>Total Recovered</h2>
+                    <h1>` +
+          data[i].cases.recovered.toLocaleString("en") +
+          `</h1>
+					</div>
+				</div>
+                <div class="row row-overview">
+					<div class="col-12 col-md-6">
+                    <h2>Total Deaths</h2>
+                    <h1>` +
+          data[i].deaths.total.toLocaleString("en") +
+          `</h1>
+					</div>
+					<div class="col-12 col-md-6">
+                    <h2>Total Critical</h2>
+                    <h1>` +
+          data[i].cases.critical.toLocaleString("en") +
+          `</h1>
+					</div>
+				</div>
+                <div class="row row-overview">
+					<div class="col-12 col-md-6">
+                    <h2>Total Active</h2>
+                    <h1>` +
+          data[i].cases.active.toLocaleString("en") +
+          `</h1>
+					</div>
+					<div class="col-12 col-md-6">
+                    <h2>Death Rate</h2>
+                    <h1>` +
+          (
+            (parseInt(data[i].deaths.total) /
+              (parseInt(data[i].cases.recovered) +
+                parseInt(data[i].deaths.total))) *
+            100
+          ).toFixed(2) +
+          `%</h1>
+					</div>
+				</div>`;
+      }
+    }
+    overviewContainer.insertAdjacentHTML("afterbegin", htmlString);
+  }
 
   function getData(data) {
     var ctx = document.getElementById("myChart");
@@ -249,7 +271,6 @@ $(document).ready(function () {
       xlabels.push(dates);
       caseData.push(cases);
       deathData.push(deaths);
-      //   console.log(cases);
     }
     var myChart = new Chart(ctx, {
       type: "line",
@@ -316,91 +337,75 @@ $(document).ready(function () {
     $("#dashboard-graphs").removeClass("d-none");
     $("#card-border").removeClass("border-0");
   }
-  //////////////////////////////////////////////////////////////////////////////
 
-  $(".overview-btn").click(function () {
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === this.DONE) {
-        var allData = JSON.parse(this.responseText);
-        console.log(allData.response);
-        getAll(allData.response);
-      }
-    });
-
-    xhr.open("GET", `https://covid-193.p.rapidapi.com/statistics`);
-    xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
-    xhr.setRequestHeader(
-      "x-rapidapi-key",
-      "90e2122e22msh4c0aac5a8989099p15d268jsn72c57b8e8b46"
-    );
-
-    xhr.send(data);
-  });
-
-  function getAll(data) {
-    var overviewContainer = document.getElementById("overview");
-    var htmlString = ``;
+  function getHTML(data) {
+    var statsConatiner = document.getElementById("table");
+    var htmlString = `<thead>
+					<tr>
+						<th scope="col">Country</th>
+						<th scope="col">Total Cases</th>
+						<th scope="col">New Cases</th>
+						<th scope="col">Total Deaths</th>
+						<th scope="col">New Deaths</th>
+					</tr>
+				</thead>
+				<tbody>`;
 
     for (i = 0; i < data.length; i++) {
-      if (data[i].country == "All") {
-        htmlString +=
-          `<div class="row row-overview">
-					<div class="col-12 col-md-6">
-                    <h2>Total Cases</h2><h1>` +
-          data[i].cases.total.toLocaleString("en") +
-          `</h1>
-					</div>
-					<div class="col-12 col-md-6">
-                    <h2>Total Recovered</h2>
-                    <h1>` +
-          data[i].cases.recovered.toLocaleString("en") +
-          `</h1>
-					</div>
-				</div>
-                <div class="row row-overview">
-					<div class="col-12 col-md-6">
-                    <h2>Total Deaths</h2>
-                    <h1>` +
-          data[i].deaths.total.toLocaleString("en") +
-          `</h1>
-					</div>
-					<div class="col-12 col-md-6">
-                    <h2>Total Critical</h2>
-                    <h1>` +
-          data[i].cases.critical.toLocaleString("en") +
-          `</h1>
-					</div>
-				</div>
-                <div class="row row-overview">
-					<div class="col-12 col-md-6">
-                    <h2>Total Active</h2>
-                    <h1>` +
-          data[i].cases.active.toLocaleString("en") +
-          `</h1>
-					</div>
-					<div class="col-12 col-md-6">
-                    <h2>Death Rate</h2>
-                    <h1>` +
-        //   data[i].deaths.total.toLocaleString("en") +
-        (parseInt(data[i].deaths.total) / (parseInt(data[i].cases.recovered) + parseInt(data[i].deaths.total))*100).toFixed(2) +
-          `%</h1>
-					</div>
-				</div>`;
-      }
+      htmlString +=
+        `<tr>
+      <th scope="row">` +
+        data[i].country +
+        `</th>` +
+        `<td>` +
+        data[i].cases.total.toLocaleString("en") +
+        `</td>` +
+        `<td>` +
+        convertToInt(data[i].cases.new) +
+        `</td>` +
+        `<td>` +
+        data[i].deaths.total.toLocaleString("en") +
+        `</td>` +
+        `<td>` +
+        convertToInt(data[i].deaths.new) +
+        `</td>`;
     }
 
-    overviewContainer.insertAdjacentHTML("afterbegin", htmlString);
+    statsConatiner.insertAdjacentHTML("afterbegin", htmlString + `</tbody>`);
+
+    function convertToInt(arrayPoint) {
+      if (arrayPoint == null) {
+        x = `0`;
+      } else x = arrayPoint.replace(/[^a-zA-Z 0-9. < / > , -]+/g, "");
+      y = parseInt(x).toLocaleString("en");
+      return y;
+    }
   }
 
-  //////////////////////////////////////////////////////////////////////////////
-  // RESET dashboard-content Container to be built to run before each seperate function
+  //////////////////////JQuery based functions//////////////////////////////////
+
   function reset() {
+    $("#overview").html(``);
     $("#dashboardStats").addClass("d-none");
     $("#dashboardCountry").addClass("d-none");
     $("#dashboard-graphs").addClass("d-none");
     $("#table_wrapper").addClass("d-hidden").addClass("d-none");
     $("#table").empty();
+  }
+
+  function showpanel() {
+    $("#table").DataTable().destroy();
+    $("#table").DataTable();
+    $("#table_wrapper")
+      .removeClass("form-inline")
+      .addClass("d-hidden")
+      .addClass("d-none");
+  }
+
+  function showtable() {
+    $("#spinner").remove();
+    $("#table").removeClass("d-hidden").removeClass("d-none");
+    $("#table_wrapper").removeClass("d-hidden").removeClass("d-none");
+    $("#dashboardStats").removeClass("d-none");
   }
 });

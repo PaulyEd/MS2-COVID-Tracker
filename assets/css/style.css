@@ -164,15 +164,7 @@ th[scope="row"] {
   width: 170px;
 }
 
-#spinner {
-  text-align: center;
-}
 
-@media (min-width: 768px) {
-  .spinner-container {
-    max-width: 614px;
-  }
-}
 
 .transparent {
   background-color: transparent;
