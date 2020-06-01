@@ -177,6 +177,11 @@ $(document).ready(function () {
   Delay();
   ///////////////OVERVIEW STATS FUNCTION END//////////////////
 
+$(".navbar-brand").click(function () {
+    reset();
+$(".jumbotron").removeClass("d-none");
+});
+
   //////////////////////////Get Functions/////////////////////////
   function getCountries(data) {
     var htmlString = `
@@ -209,41 +214,42 @@ $(document).ready(function () {
         htmlString +=
           `<div class="row row-overview">
 					<div class="col-12 col-md-6">
-                    <h2>Total Cases</h2><h1>` +
+                    <h2>Total Cases</h2>
+                    <h1 class="neutral">` +
           data[i].cases.total.toLocaleString("en") +
           `</h1>
 					</div>
 					<div class="col-12 col-md-6">
-                    <h2>Total Recovered</h2>
-                    <h1>` +
-          data[i].cases.recovered.toLocaleString("en") +
-          `</h1>
-					</div>
-				</div>
-                <div class="row row-overview">
-					<div class="col-12 col-md-6">
-                    <h2>Total Deaths</h2>
-                    <h1>` +
-          data[i].deaths.total.toLocaleString("en") +
-          `</h1>
-					</div>
-					<div class="col-12 col-md-6">
-                    <h2>Total Critical</h2>
-                    <h1>` +
-          data[i].cases.critical.toLocaleString("en") +
-          `</h1>
-					</div>
-				</div>
-                <div class="row row-overview">
-					<div class="col-12 col-md-6">
                     <h2>Total Active</h2>
-                    <h1>` +
+                    <h1 class="neutral">` +
           data[i].cases.active.toLocaleString("en") +
           `</h1>
 					</div>
+				</div>
+                <div class="row row-overview">
 					<div class="col-12 col-md-6">
-                    <h2>Death Rate</h2>
-                    <h1>` +
+                    <h2>Total Recovered</h2>
+                    <h1 class="recoveries">` +
+          data[i].cases.recovered.toLocaleString("en") +
+          `</h1>
+					</div>
+					<div class="col-12 col-md-6">
+                    <h2>Total Deaths</h2>
+                    <h1 class="deaths">` +
+          data[i].deaths.total.toLocaleString("en") +
+          `</h1>
+					</div>
+				</div>
+                <div class="row row-overview">
+					<div class="col-12 col-md-6">
+                    <h2>Total Critical</h2>
+                    <h1 class="caution">` +
+          data[i].cases.critical.toLocaleString("en") +
+          `</h1>
+					</div>
+					<div class="col-12 col-md-6">
+                    <h2 data-toggle="popover" data-content="Note: This statistic only represents data for cases that have come to a definitive conclusion">Death Rate</h2>
+                    <h1 class="deaths">` +
           (
             (parseInt(data[i].deaths.total) /
               (parseInt(data[i].cases.recovered) +
@@ -256,6 +262,10 @@ $(document).ready(function () {
       }
     }
     overviewContainer.insertAdjacentHTML("afterbegin", htmlString);
+    $('[data-toggle="popover"]').popover({
+      placement: "top",
+      trigger: "hover",
+    });
   }
 
   function getData(data) {
@@ -386,6 +396,7 @@ $(document).ready(function () {
 
   function reset() {
     $("#overview").html(``);
+    $(".jumbotron").addClass("d-none");
     $("#dashboardStats").addClass("d-none");
     $("#dashboardCountry").addClass("d-none");
     $("#dashboard-graphs").addClass("d-none");
@@ -408,4 +419,6 @@ $(document).ready(function () {
     $("#table_wrapper").removeClass("d-hidden").removeClass("d-none");
     $("#dashboardStats").removeClass("d-none");
   }
+    
+
 });

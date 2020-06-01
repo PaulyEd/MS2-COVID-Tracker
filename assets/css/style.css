@@ -106,6 +106,9 @@ h1, h2, h3 {
     width: 100%;
   }
 }
+ .row-overview h1 {
+      margin-bottom: 2rem;
+  }
 
 .navbar-border {
   border-bottom: 1px solid #fff;
@@ -165,7 +168,6 @@ th[scope="row"] {
 }
 
 
-
 .transparent {
   background-color: transparent;
 }
@@ -174,17 +176,6 @@ th[scope="row"] {
   width: 900px;
   height: auto;
 }
-
-/* Extra small devices (phones, 600px and down) */
-/* @media (max-width: 600px) {
-  .chart-container {
-    width: 650px;
-    height: auto;
-  }
-  #myChart{
-      min-width: 550px;
-  }
-} */
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media (min-width: 0px) {
@@ -242,13 +233,10 @@ th[scope="row"] {
 }
 
 #get-graph {
-  /* margin-left: 1rem; */
   max-height: 42px;
   width: 163px;
 }
-/* #selector-container{
-    text-align: left;
-} */
+
 #select-label {
   text-align: right;
   vertical-align: middle;
@@ -268,10 +256,6 @@ th[scope="row"] {
   padding: 0;
 }
 
-/* .country-selector {
-  text-align: center;
-  display: inline-flex;
-} */
 
 .select2-container {
   min-width: 163px;
@@ -299,17 +283,28 @@ th[scope="row"] {
     position: relative !important;
 }
 
-.row-overview{
-    margin-bottom: 2rem;
+.recoveries {
+    color: #7CFC00;
+}
+.deaths {
+    color: #DC143C;
 }
 
+.neutral {
+    color: #00BFFF;
+}
 
+.caution {
+    color: #FFA500	;
+}
 
+.first-word{
+    font-weight: 700;
+}
 
-
-
-
-
+.jumbotron h1 {
+    color: #696969;
+}
 
 
 
@@ -350,6 +345,8 @@ th[scope="row"] {
 /* https://getbootstrap.com/docs/4.0/components/pagination/ */
 /* https://stackoverflow.com/questions/46462171/using-the-same-function-with-multiple-buttons */
 /* https://stackoverflow.com/questions/50715991/update-javascript-variable-on-a-html-select-value-change */
+/* https://www.flaticon.com/free-icon/mask_2904205?term=covid%2019&page=1&position=3 */
+/* https://codepen.io/profoj/pen/abzgpLN */
 
 /* ---------Chart JS-------- */
 /* https://www.chartjs.org/docs/latest/getting-started/ */

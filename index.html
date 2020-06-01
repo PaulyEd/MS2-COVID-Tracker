@@ -18,7 +18,7 @@
 	<!-- Local CSS -->
 	<link rel="stylesheet" href="assets/css/style.css" />
 	<!-- Favicon -->
-	<link rel="icon" type="image/x-icon" href="assets/images/icon.png" />
+	<link rel="icon" type="image/x-icon" href="assets/images/mask-icon.png" />
 	<title>COVID-19 Dashboard</title>
 </head>
 
@@ -37,7 +37,7 @@
       </button>
 		<a class="navbar-brand" href="#">
 			<img
-          src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg"
+          src="assets/images/mask.png"
           width="30"
           height="30"
           class="d-inline-block align-top"
@@ -48,13 +48,16 @@
 		<div class="collapse navbar-collapse" aria-labelledby="smallerscreenmenu" id="navbarNavDropdown">
 			<ul class="navbar-nav ml-auto d-block d-md-none">
 				<li class="nav-item overview-btn">
-					<a class="nav-link" href="#">Overview</a>
+					<a class="nav-link">Overview</a>
 				</li>
 				<li class="nav-item table-btn">
-					<a class="nav-link" href="#">Tables</a>
+					<a class="nav-link">Tables</a>
 				</li>
 				<li class="nav-item graph-btn" id="refresh">
-					<a class="nav-link" href="#">Graphs</a>
+					<a class="nav-link">Graphs</a>
+				</li>
+				<li class="nav-item" data-toggle="modal" data-target="#exampleModalLong" id="help">
+					<a class="nav-link">Help</a>
 				</li>
 			</ul>
 		</div>
@@ -98,7 +101,8 @@
 					<small>OPTIONS</small>
 				</li>
 				<!-- /END Separator -->
-				<a href="#" class="bg-dark list-group-item list-group-item-action">
+				<a href="#" class="bg-dark list-group-item list-group-item-action" data-toggle="modal"
+					data-target="#exampleModalLong">
 					<div class="d-flex w-100 justify-content-start align-items-center">
 						<span class="fa fa-question fa-fw mr-3"></span>
 						<span class="menu-collapsed">Help</span>
@@ -115,10 +119,27 @@
 			</ul>
 			<!-- List Group END-->
 		</div>
-
 		<!-- sidebar-container END -->
 		<!-- JS Generated Content -->
 		<div class="content-container" id="dashboard-content">
+			<div class="jumbotron">
+				<h1 class="display-4"><img
+          src="assets/images/mask.png"
+          width="90"
+          height="90"
+          class="d-inline-block center"
+          alt=""
+        /><br>COVID-19 Tracker</h1>
+				<p class="lead">Welcome to the COVID-19 tracker!</p>
+				<hr class="my-4">
+				<p class="d-none d-md-block">This dashboard provides a snapshot view into the COVID-19 situation both globally and by country. For tips how to use this dashboard please click the help button in the side bar on the left of the screen.
+				</p>
+                <p class="d-block d-md-none">This dashboard provides a snapshot view into the COVID-19 situation both globally and by country. For tips how to use this dashboard please click the help button in the navigation bar at the top of the screen.
+				</p>
+				<!-- <p class="lead">
+					<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+				</p> -->
+			</div>
 			<!-- ///////////////////////////////////////////////////////// -->
 			<!-- Overview -->
 			<div class="container overview-container" id="overview">
@@ -157,6 +178,41 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Dashboard Help</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+				</div>
+				<div class="modal-body">
+					This Dashboard has a simplistic layout designed to keep to the pupose of the site, Data
+					presentataion. The links below are accessible from the sidebar (left of page) and the navigation bar
+					(top of page on smaller devices):
+					<br><br>
+					<ul>
+						<li><span class="first-word">Overview:</span> Provides a snapshot of the overall current number
+							globally.</li>
+						<li><span class="first-word">Tables:</span> Provides a table based breakdown of some key number
+							for all the countries in the
+							world,
+							this table is paginated, searchable and sortable for ease of use.</li>
+						<li><span class="first-word">Graphs:</span> Provides a visual represenation total deaths vs
+							total recovered for any country
+							available
+							in the table above.</li>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
