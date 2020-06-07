@@ -37,7 +37,8 @@ $(document).ready(function () {
   var clickDelay = function () {
     $(".table-btn").click(function () {
       reset();
-
+    //   adds entire screen overlay to prevent clicking other funcitons while table loading
+      $(`<div class="overlay"></div>`).insertAfter(`body`);
       // add loader gif
       document.getElementById("dashboard-content").insertAdjacentHTML(
         "beforeend",
@@ -45,7 +46,7 @@ $(document).ready(function () {
             <img src="assets/images/spinner.gif" alt="loading..." />
         </div>`
       );
-
+      // request to API
       var xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
       xhr.addEventListener("readystatechange", function () {
@@ -54,7 +55,7 @@ $(document).ready(function () {
           //   console.log(ourData.response);
           //   remove loader gif
           //   $("#spinner").remove();
-          $.when(getHTML(ourData.response)).then(setTimeout(showpanel, 1));
+          $.when(getTableData(ourData.response)).then(setTimeout(showpanel, 1));
         }
       });
 
@@ -76,6 +77,7 @@ $(document).ready(function () {
         $("#table").parent("div").addClass("table_scroll");
         $("#table_wrapper").addClass("table_wrapper");
         $("#table_paginate").children("ul").addClass("pagination-sm");
+        $(".overlay").remove();
         setTimeout(showtable, 1);
       }, 2000);
     });
@@ -87,7 +89,6 @@ $(document).ready(function () {
   var country = "";
   $(".graph-btn").click(function () {
     reset();
-    // $("#dashboard-graphs").removeClass("d-none");
     var dashboard = document.getElementById("selector-container");
     var data = null;
     var xhr = new XMLHttpRequest();
@@ -117,7 +118,6 @@ $(document).ready(function () {
     $("#graph-container").append(
       '<canvas id="myChart" class="transparent"></canvas>'
     );
-    // console.log(country);
 
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -125,9 +125,7 @@ $(document).ready(function () {
       if (this.readyState === this.DONE) {
         var historyData = JSON.parse(this.responseText);
         console.log(historyData.response);
-        getData(historyData.response);
-        // var date = historyData.response[35].day;
-        // console.log(date);
+        getChartData(historyData.response);
       }
     });
 
@@ -177,10 +175,10 @@ $(document).ready(function () {
   Delay();
   ///////////////OVERVIEW STATS FUNCTION END//////////////////
 
-$(".navbar-brand").click(function () {
+  $(".navbar-brand").click(function () {
     reset();
-$(".jumbotron").removeClass("d-none");
-});
+    $(".jumbotron").removeClass("d-none");
+  });
 
   //////////////////////////Get Functions/////////////////////////
   function getCountries(data) {
@@ -250,6 +248,7 @@ $(".jumbotron").removeClass("d-none");
 					<div class="col-12 col-md-6">
                     <h2 data-toggle="popover" data-content="Note: This statistic only represents data for cases that have come to a definitive conclusion">Death Rate</h2>
                     <h1 class="deaths">` +
+          //   Death rate calculation
           (
             (parseInt(data[i].deaths.total) /
               (parseInt(data[i].cases.recovered) +
@@ -261,6 +260,7 @@ $(".jumbotron").removeClass("d-none");
 				</div>`;
       }
     }
+    // Side note on hover for death rate
     overviewContainer.insertAdjacentHTML("afterbegin", htmlString);
     $('[data-toggle="popover"]').popover({
       placement: "top",
@@ -268,7 +268,7 @@ $(".jumbotron").removeClass("d-none");
     });
   }
 
-  function getData(data) {
+  function getChartData(data) {
     var ctx = document.getElementById("myChart");
     var xlabels = [];
     var caseData = [];
@@ -325,6 +325,7 @@ $(".jumbotron").removeClass("d-none");
             {
               ticks: {
                 fontColor: "white",
+                // thousands separator style
                 userCallback: function (value, index, values) {
                   value = value.toString();
                   value = value.split(/(?=(?:...)*$)/);
@@ -348,7 +349,7 @@ $(".jumbotron").removeClass("d-none");
     $("#card-border").removeClass("border-0");
   }
 
-  function getHTML(data) {
+  function getTableData(data) {
     var statsConatiner = document.getElementById("table");
     var htmlString = `<thead>
 					<tr>
@@ -362,27 +363,35 @@ $(".jumbotron").removeClass("d-none");
 				<tbody>`;
 
     for (i = 0; i < data.length; i++) {
-      htmlString +=
-        `<tr>
+      if (
+        data[i].country == "All" ||
+        data[i].country == "North-America" ||
+        data[i].country == "Europe" ||
+        data[i].country == "Asia" ||
+        data[i].country == "South-America"
+      ) {
+      } else
+        htmlString +=
+          `<tr>
       <th scope="row">` +
-        data[i].country +
-        `</th>` +
-        `<td>` +
-        data[i].cases.total.toLocaleString("en") +
-        `</td>` +
-        `<td>` +
-        convertToInt(data[i].cases.new) +
-        `</td>` +
-        `<td>` +
-        data[i].deaths.total.toLocaleString("en") +
-        `</td>` +
-        `<td>` +
-        convertToInt(data[i].deaths.new) +
-        `</td>`;
+          data[i].country +
+          `</th>` +
+          `<td>` +
+          data[i].cases.total.toLocaleString("en") +
+          `</td>` +
+          `<td>` +
+          convertToInt(data[i].cases.new) +
+          `</td>` +
+          `<td>` +
+          data[i].deaths.total.toLocaleString("en") +
+          `</td>` +
+          `<td>` +
+          convertToInt(data[i].deaths.new) +
+          `</td>`;
     }
 
     statsConatiner.insertAdjacentHTML("afterbegin", htmlString + `</tbody>`);
-
+    // remove misc characters and convert to thousands separator style
     function convertToInt(arrayPoint) {
       if (arrayPoint == null) {
         x = `0`;
@@ -419,6 +428,4 @@ $(".jumbotron").removeClass("d-none");
     $("#table_wrapper").removeClass("d-hidden").removeClass("d-none");
     $("#dashboardStats").removeClass("d-none");
   }
-    
-
 });
