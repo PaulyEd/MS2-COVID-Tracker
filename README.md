@@ -1,6 +1,41 @@
 # COVID-19 Tracker
 
+COVID-19 Tracker is a simplistic dashboard based webstie to provide numerical inforamtion both globally and on a national level related to the coronavirus pandemic. The inforamtion this app proivdes as a visual representation of the free COVID19 API available via Rapid API. 
+
+The app is broke out into 3 main sections as follows:
+
+1. Overiew - Provides a quick snapshot of the important global case numbers in terms of active, deaths, recovered and critical.
+
+2. Tables - Table based data showing every country available via the API, allows for a quick snapshot of the situation on a national level.
+
+3. Graphs - Graphical data showing number of deaths vs number of recovered over time, key for provide a visual of the trend.
+
 ## UX & FEATURES
+
+### User Stories
+The app is design for the average person who is curious about the coronavirus situation. I know from personal experience everyday in my house at around 6:00pm (right about when the news comes on) I always here the question "oh I wonder what the numbers are today?" (refferring to COVID-19 new cases and deaths). This is a common theme regarding most of the conversations I am having these days "oh have you seen todays numbers?". What most people want in this situation is a quick & concise way to see the situation primarily in their area/country and in a lot of cases due to curiousity what its like globally and in other countries, that is the purpose of this app, minimal frills information presented aesthetically easy to understand.
+
+### Design
+As the basis of this app was for data visualisation and presentation I opted to build a dashboard style setup as this would be a common practice & expectation when deisgning a data based app.
+
+**Navbar:** Commonplace on website these days, although doesnt add much value on the larger screen for this app (branding mainly), becomes vital on the mid-smaller screens as the JS functions triggers move from the sidebar to the navbar to allow the data take up more of the screen.
+
+**Sidebar:** Key component of the dashboard style setup, provide a navigation point for the dashboard and helps the side appear less barren (which can be an issue when presenting data). On mid to smaller screens the sidebar disappears as is less important that the data which should be the focus.
+
+**Navbar:** Commonplace on website these days, although doesnt add much value on the larger screen for this app (branding mainly), becomes vital on the mid-smaller screens as the JS functions triggers move from the sidebar to the navbar to allow the data take up more of the screen.
+
+**Jumbotron:** Essential to have some form of information section to provide guidance on data based apps, welcomes the user before providing data provided too soon could cause confusion
+
+**Tables:** Dashboard essential, utilised to show a large volume of data, but with added functionality to allow user to sort & search for the data they want.
+
+**Graphs:** Again dashboard essential for visualising data and trends, common expectation in sitautions like the COVID-19 pandemic where trend over time is a key metric
+
+**Modal:** User guidance easily available for those who need it and out for the way for those who don't need it.
+
+### Wireframes
+<img src="/assets/wireframes/wireframe-mobile.png" style="center" width="25%">
+<img src="/assets/wireframes/wireframe-desktop.png" style="center" width="40%">
+
 
 ## TECHNOLOGIES USED
 
@@ -33,6 +68,7 @@
 * [Loading.io](https://loading.io/) - Create loading image.
 * [AutoPrefixer](https://autoprefixer.github.io/) - Add vendor prefixes to CSS.
 * [Codepen](https://codepen.io/) - Isolated code testing.
+* [Figma] (https://www.figma.com/) - Wireframes.
 
 ## TESTING
 
