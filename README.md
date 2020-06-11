@@ -68,10 +68,21 @@ As the basis of this app was for data visualisation and presentation I opted to 
 * [Loading.io](https://loading.io/) - Create loading image.
 * [AutoPrefixer](https://autoprefixer.github.io/) - Add vendor prefixes to CSS.
 * [Codepen](https://codepen.io/) - Isolated code testing.
-* [Figma] (https://www.figma.com/) - Wireframes.
+* [Figma](https://www.figma.com/) - Wireframes.
 
-## TESTING
+## TESTING / ISSUE RESOLUTION
 
+Each section has had extensive individual testing across multiple browsers including the use of chrome developer tools & [Website Responsive Testing Tool](http://responsivetesttool.com/) to test on a wide variety for sizes and aspect ratios, please see some key points to note below:
+
+1. Responsiveness - alot of consideration had to taken here as the javascript generates HTML code, therefore the responsiveness had to be tested on every button click and multple combinations of button clicks. For the most part I beleive this testing lead to a responsiveness level that I'm content with, my one outstanding responsiveness issue is with the graph, in order to see the enitre graph the user needs to scroll the page horizontally, I would prefer it to be like the table where only the table scrolls to fit data but when trying to use this approach I came into scale issues with the graph that made it unreadable.
+
+2. Dashboard layout - due to the way i setup the dashboard style page using column/row combination I had to adjust standard bootstrap container sizes as the standard ones would push the content (API data) below the sidebar as they wouldnt factor the space the sidebar took up on screen into the flexiblity of the content containers.
+
+3. Single Button Spamming - due to the content of the app being JS generated via an API I ran into issues of button spamming (multiple clicks of same button) so I had to develope a way to prevent large numbers of requests going to the API in a short amount of time, this was resovled by adding a delay to some of the funcitons meaning the button would be disabled for 2 seconds after click. 
+
+4. Concurrent function execution - due to testing an issue arose where rapid click of different buttons would cause multple functions to trigger concurrently which led to disfigured data, this was resolved again by click delay functions and also for the table click (which takes the longest and therefore had to greatest potential for concurrent clicks) an transparent overlay would be generated to cover teh entire page until the function was complete, preventing any buttn clicks while process was running.
+
+5. API testing - Alot of my API testing can be seen via my commit history, at some stage in the creation of all of my API JS functions I have various instances of concsole logging to see what data I was getting back from the API and then trial and error to get teh data I wanted back. These testing pieces of code have since been removed for the cleanliness of the code once the funciton was working as hoped.
 
 
 ## DEPLOYMENT
