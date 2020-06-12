@@ -52,9 +52,6 @@ $(document).ready(function () {
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
           let ourData = JSON.parse(this.responseText);
-          //   console.log(ourData.response);
-          //   remove loader gif
-          //   $("#spinner").remove();
           $.when(getTableData(ourData.response)).then(setTimeout(showpanel, 1));
         }
       });
@@ -124,7 +121,7 @@ $(document).ready(function () {
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
         let historyData = JSON.parse(this.responseText);
-        console.log(historyData.response);
+        
         getChartData(historyData.response);
       }
     });
@@ -153,7 +150,6 @@ $(document).ready(function () {
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
           let allData = JSON.parse(this.responseText);
-          console.log(allData.response);
           getAll(allData.response);
         }
       });
