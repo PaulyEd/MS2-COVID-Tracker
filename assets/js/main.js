@@ -23,7 +23,7 @@ $(document).ready(function () {
     $("#sidebar-container").toggleClass("sidebar-expanded sidebar-collapsed");
 
     // Treating d-flex/d-none on separators with title
-    var SeparatorTitle = $(".sidebar-separator-title");
+    let SeparatorTitle = $(".sidebar-separator-title");
     if (SeparatorTitle.hasClass("d-flex")) {
       SeparatorTitle.removeClass("d-flex");
     } else {
@@ -33,8 +33,8 @@ $(document).ready(function () {
   /////////////////SIDE BAR FUNCTIONS END//////////////////////////
 
   /////////////////TABLE POPULATE FUNCTION////////////////////////////
-  var data = null;
-  var clickDelay = function () {
+  let data = null;
+  let clickDelay = function () {
     $(".table-btn").click(function () {
       reset();
     //   adds entire screen overlay to prevent clicking other funcitons while table loading
@@ -47,11 +47,11 @@ $(document).ready(function () {
         </div>`
       );
       // request to API
-      var xhr = new XMLHttpRequest();
+      let xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
-          var ourData = JSON.parse(this.responseText);
+          let ourData = JSON.parse(this.responseText);
           //   console.log(ourData.response);
           //   remove loader gif
           //   $("#spinner").remove();
@@ -86,16 +86,16 @@ $(document).ready(function () {
   ///////////////TABLE POPULATE FUNCTION END/////////////////////
 
   //////////COUNTRIES FOR TABLE FUNCTION////////////////////////
-  var country = "";
+  let country = "";
   $(".graph-btn").click(function () {
     reset();
-    var dashboard = document.getElementById("selector-container");
-    var data = null;
-    var xhr = new XMLHttpRequest();
+    let dashboard = document.getElementById("selector-container");
+    let data = null;
+    let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
-        var ourData = JSON.parse(this.responseText);
+        let ourData = JSON.parse(this.responseText);
         getCountries(ourData.response);
       }
     });
@@ -119,11 +119,11 @@ $(document).ready(function () {
       '<canvas id="myChart" class="transparent"></canvas>'
     );
 
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
-        var historyData = JSON.parse(this.responseText);
+        let historyData = JSON.parse(this.responseText);
         console.log(historyData.response);
         getChartData(historyData.response);
       }
@@ -144,15 +144,15 @@ $(document).ready(function () {
   ///////////////GRAPH DATA FUNCTION END//////////////////
 
   ///////////////OVERVIEW STATS FUNCTION/////////////////////
-  var Delay = function () {
+  let Delay = function () {
     $(".overview-btn").click(function () {
       $(this).attr("disabled", "disabled");
       reset();
-      var xhr = new XMLHttpRequest();
+      let xhr = new XMLHttpRequest();
       xhr.withCredentials = true;
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
-          var allData = JSON.parse(this.responseText);
+          let allData = JSON.parse(this.responseText);
           console.log(allData.response);
           getAll(allData.response);
         }
@@ -182,7 +182,7 @@ $(document).ready(function () {
 
   //////////////////////////Get Functions/////////////////////////
   function getCountries(data) {
-    var htmlString = `
+    let htmlString = `
 				<select id="selectCountry">`;
 
     for (i = 0; i < data.length; i++) {
@@ -195,8 +195,8 @@ $(document).ready(function () {
     $("#dashboardCountry").removeClass("d-none");
 
     //   Use Country selector as variable
-    var selectCountry = document.getElementById("selectCountry");
-    var lvl = document.getElementById("lvl");
+    let selectCountry = document.getElementById("selectCountry");
+    let lvl = document.getElementById("lvl");
     selectCountry.onchange = function () {
       country = this.options[this.selectedIndex].getAttribute("value");
     };
@@ -204,8 +204,8 @@ $(document).ready(function () {
   }
 
   function getAll(data) {
-    var overviewContainer = document.getElementById("overview");
-    var htmlString = ``;
+    let overviewContainer = document.getElementById("overview");
+    let htmlString = ``;
 
     for (i = 0; i < data.length; i++) {
       if (data[i].country == "All") {
@@ -269,20 +269,20 @@ $(document).ready(function () {
   }
 
   function getChartData(data) {
-    var ctx = document.getElementById("myChart");
-    var xlabels = [];
-    var caseData = [];
-    var deathData = [];
+    let ctx = document.getElementById("myChart");
+    let xlabels = [];
+    let caseData = [];
+    let deathData = [];
 
     for (i = parseInt(data.length) - 1; i >= 0; i--) {
-      var dates = data[i].day;
-      var cases = data[i].cases.recovered;
-      var deaths = data[i].deaths.total;
+      let dates = data[i].day;
+      let cases = data[i].cases.recovered;
+      let deaths = data[i].deaths.total;
       xlabels.push(dates);
       caseData.push(cases);
       deathData.push(deaths);
     }
-    var myChart = new Chart(ctx, {
+    let myChart = new Chart(ctx, {
       type: "line",
       data: {
         labels: xlabels,
@@ -350,8 +350,8 @@ $(document).ready(function () {
   }
 
   function getTableData(data) {
-    var statsConatiner = document.getElementById("table");
-    var htmlString = `<thead>
+    let statsConatiner = document.getElementById("table");
+    let htmlString = `<thead>
 					<tr>
 						<th scope="col">Country</th>
 						<th scope="col">Total Cases</th>
